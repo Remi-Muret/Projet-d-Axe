@@ -133,8 +133,8 @@ MonoBehaviour:
     m_Bits: 8
   playerHitboxRight: {fileID: 5932399971858059318}
   playerHitboxLeft: {fileID: 2499605623554844244}
-  projectilePrefab: {fileID: 3523927582432450187, guid: ad631f8491332024d9d20e94928a164f, type: 3}
-  bombPrefab: {fileID: 3532137311275573781, guid: 11bfca522d1f63945b484562da174135, type: 3}
+  projectilePrefab: {fileID: 3523927582432450187, guid: 354659a26103d7d4e960883d5e1faf71, type: 3}
+  bombPrefab: {fileID: 4194121891865127377, guid: 65984b275337e494596a1c97e31a2a90, type: 3}
   jumpSound: {fileID: 0}
   dodgeSound: {fileID: 0}
   attackSound: {fileID: 0}

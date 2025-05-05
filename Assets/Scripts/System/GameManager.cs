@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +10,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private EnemyADatabase _enemyADatabase;
     [SerializeField] private EnemyBDatabase _enemyBDatabase;
-    [SerializeField] private EnemyBombDatabase _enemyBombDatabase;
     [SerializeField] private ItemDatabase _itemDatabase;
     [SerializeField] private GameObject _playerPrefab;
 
@@ -32,13 +32,11 @@ public class GameManager : MonoBehaviour
 
     public EnemyBData GetEnemyBData(int id) => _enemyBDatabase.GetEnemyBData(id);
 
-    public EnemyBombData GetEnemyBombData(int id) => _enemyBombDatabase.GetEnemyBombData(id);
-
-    public ItemDatabase GetItemData() => _itemDatabase;
+    public ObjectData GetItemData(ItemDatabase.Category category, int id) => _itemDatabase.GetData(category, id);
 
     public void RegisterCheckpoint(CheckpointData checkpoint)
     {
-        if (checkpoint.ID > _currentCheckpoint.ID)
+        if (checkpoint.Id > _currentCheckpoint.Id)
             _currentCheckpoint = checkpoint;
     }
 

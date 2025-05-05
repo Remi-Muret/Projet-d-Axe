@@ -14,16 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBData:
   - label: Enemy B 1
-    scaleCoef: 0.5
+    scale: 1
+    gravity: 0
     sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
     moveSpeed: 5
+    jumpForce: 0
     health: 4
     meleeDamage: 1
     waitDuration: 0.2
+    detectionRadius: 5
     patrolPointA: {x: 5, y: 0}
     patrolPointB: {x: -5, y: 0}
-    detectionRadius: 5
     bombCooldown: 0.5
     detectionMinAngle: -180
     detectionMaxAngle: 0

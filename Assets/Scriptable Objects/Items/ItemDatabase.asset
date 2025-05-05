@@ -12,13 +12,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42565996fadf4cb42955daaef5f13a60, type: 3}
   m_Name: ItemDatabase
   m_EditorClassIdentifier: 
-  itemDatas:
-  - itemType: 0
-    scaleCoef: 1
-    sprite: {fileID: 0}
-  - itemType: 1
-    scaleCoef: 1
-    sprite: {fileID: 0}
-  - itemType: 2
-    scaleCoef: 1
-    sprite: {fileID: 0}
+  _categoryGroups:
+  - label: Power
+    category: 0
+    items:
+    - label: Bomb
+      scale: 1
+      gravity: 0
+      sprite: {fileID: 0}
+      color: {r: 1, g: 0, b: 0, a: 1}
+    - label: Melee
+      scale: 1
+      gravity: 0
+      sprite: {fileID: 0}
+      color: {r: 1, g: 0.33333334, b: 0, a: 1}
+    - label: Projectile
+      scale: 1
+      gravity: 0
+      sprite: {fileID: 0}
+      color: {r: 1, g: 0.6666667, b: 0, a: 1}
+  - label: Coin
+    category: 1
+    items:
+    - label: Coin 1
+      scale: 1
+      gravity: 3
+      sprite: {fileID: 0}
+      color: {r: 0.33333325, g: 1, b: 0, a: 1}
+    - label: Coin 5
+      scale: 1
+      gravity: 3
+      sprite: {fileID: 0}
+      color: {r: 0, g: 1, b: 0.3333335, a: 1}
+    - label: Coin 10
+      scale: 1
+      gravity: 3
+      sprite: {fileID: 0}
+      color: {r: 0, g: 1, b: 0.66666675, a: 1}
+  - label: Life
+    category: 2
+    items:
+    - label: Life 1
+      scale: 1
+      gravity: 0
+      sprite: {fileID: 0}
+      color: {r: 0, g: 0, b: 1, a: 1}
+    - label: Life 2
+      scale: 1
+      gravity: 0
+      sprite: {fileID: 0}
+      color: {r: 0.33333302, g: 0, b: 1, a: 1}
+    - label: Life 3
+      scale: 1
+      gravity: 0
+      sprite: {fileID: 0}
+      color: {r: 0.666667, g: 0, b: 1, a: 1}
+  - label: Player Attack
+    category: 3
+    items:
+    - label: Player Bomb
+      scale: 1
+      gravity: 3
+      sprite: {fileID: 0}
+      color: {r: 1, g: 1, b: 1, a: 1}
+    - label: Player Projectile
+      scale: 1
+      gravity: 0
+      sprite: {fileID: 0}
+      color: {r: 1, g: 1, b: 1, a: 1}
+  - label: Enemy Attack
+    category: 4
+    items:
+    - label: Enemy Bomb
+      scale: 1
+      gravity: 3
+      sprite: {fileID: 0}
+      color: {r: 1, g: 1, b: 1, a: 1}

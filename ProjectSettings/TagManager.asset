@@ -5,16 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - Player Attack
-  - Player Projectile
-  - Player Bomb
-  - Player Bomb Explosion
   - Anchor
   - Checkpoint
   - Item
-  - Enemy A
-  - Enemy B
-  - Enemy Bomb
-  - Enemy Bomb Explosion
+  - Enemy
+  - Enemy Attack
   layers:
   - Default
   - TransparentFX

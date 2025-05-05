@@ -27,6 +27,10 @@ MonoBehaviour:
   invulnerabilityTime: 1
   knockbackX: 10
   knockbackY: 5
+  bombDamage: 3
+  bombForce: 15
+  bombAngle: 65
+  bombCooldown: 1
   meleeDamage: 2
   attackChargeRate: 0.15
   dashSpeed: 40
@@ -34,8 +38,4 @@ MonoBehaviour:
   maxAttackDuration: 0.2
   projectileDamage: 1
   projectileForce: 20
-  projectileCooldown: 0.5
-  bombDamage: 3
-  bombForce: 16
-  bombAngle: 45
-  bombCooldown: 1.2
+  projectileCooldown: 0.3
