@@ -1,19 +1,14 @@
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptable Objects/PlayerData", order = 1)]
-public class PlayerData : ScriptableObject
+[Serializable]
+public class PlayerData : ObjectData
 {
-    [Header("Set up")]
-	public float scaleCoef;
-    public float gravity;
-	public Sprite sprite;
-    public Color color;
-
     [Header("Movement")]
-    public float wallSlideGravity;
     public float moveSpeed;
     public float jumpForce;
     public float jumpDuration;
+    public float wallSlideGravity;
     public float wallJumpForceX;
     public float wallJumpForceY;
 

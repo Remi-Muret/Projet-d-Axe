@@ -2,43 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAController : ObjectController
+public class EnemyAController : EnemyController
 {
-    [Header("Debug")]
-    [SerializeField] private bool _guiDebug;
-    [SerializeField] private bool _showGizmos;
-
-    [Header("Set up")]
-    [SerializeField] private int _id;
-    [SerializeField] private bool _reverseOrientation;
-
-    public int Id => _id;
-
-    [Header("Ground check")]
-    [SerializeField] private LayerMask _groundLayer;
-    [SerializeField] private Transform _groundChecker;
-    [SerializeField] private Vector2 _groundCheckerBoxSize;
-
     private EnemyAData _enemyAData;
-    private GameObject _player;
 
-    private Vector2 _startPosition;
-    private Vector2 _patrolTargetA;
-    private Vector2 _patrolTargetB;
-
-    private float _direction;
-    private float _jumpDirection;
     private float _chargeDirection;
-    private float _patrolPauseTimer;
-    private bool _playerDetected;
-    private bool _canJump;
-    private bool _canCharge;
-    private bool _moveToPointA;
-    private bool _isPaused;
     private bool _isCharging;
     private bool _isStunned;
-    private bool _facingRight;
-    private bool _facingLeft;
 
     protected override void Awake()
     {
@@ -48,55 +18,37 @@ public class EnemyAController : ObjectController
     protected override void Start()
     {
         Init();
+
+        _patrolTargetA = _startPosition + _enemyAData.patrolPointA;
+        _patrolTargetB = _startPosition + _enemyAData.patrolPointB;
     }
 
     protected override void Init()
     {
+        _data = GameManager.Instance.GetEnemyAData(_id);
         _enemyAData = GameManager.Instance.GetEnemyAData(_id);
-        _player = GameObject.FindWithTag("Player");
         
         base.Init();
-
-        _startPosition = transform.position;
-        _patrolTargetA = _startPosition + _enemyAData.patrolPointA;
-        _patrolTargetB = _startPosition + _enemyAData.patrolPointB;
-
-        _moveToPointA = !_reverseOrientation;
-        _canCharge = true;
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
+        LockedDirection();
+        Move();
+        Jump();
+
         if (_player == null)
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             if (_player == null) return;
         }
 
-        if (_spriteRenderer.flipX)
-        {
-            _facingRight = false;
-            _facingLeft = true;
-        }
-        else
-        {
-            _facingRight = true;
-            _facingLeft = false;
-        }
-
-        LockedDirection();
-        Move();
-        Jump();
         Patrol();
-        Animation();
 
-        if (DetectPlayer() && _canCharge)
+        if (DetectPlayer() && _canAttack)
             StartCoroutine(Charge()); 
-    }
-    
-    void Update()
-    {
-        Animation();
     }
 
     bool CheckGroundCollision() => Physics2D.OverlapBox(_groundChecker.position, _groundCheckerBoxSize, 0f, _groundLayer);
@@ -182,7 +134,7 @@ public class EnemyAController : ObjectController
     IEnumerator Charge()
     {
         _isCharging = true;
-        _canCharge = false;
+        _canAttack = false;
 
         if (_player != null)
             _direction = Mathf.Sign(_player.transform.position.x - transform.position.x);
@@ -198,7 +150,7 @@ public class EnemyAController : ObjectController
 
         yield return new WaitForSeconds(_enemyAData.chargeCooldown);
 
-        _canCharge = true;
+        _canAttack = true;
     }
 
     IEnumerator Hitstun()
@@ -248,9 +200,10 @@ public class EnemyAController : ObjectController
     void OnTriggerEnter2D(Collider2D collider)
     {
         PlayerData _playerData = GameManager.Instance.GetPlayerData();
+        HealthSystem healthSystem = GetComponent<HealthSystem>();
+
         if (collider.CompareTag("Player Attack"))
         {
-            HealthSystem healthSystem = GetComponent<HealthSystem>();
             if (healthSystem != null)
             {
                 ItemController item = collider.GetComponent<ItemController>();
@@ -283,18 +236,6 @@ public class EnemyAController : ObjectController
     {
         if (collision.collider.CompareTag("Player"))
             StartCoroutine(Hitstun()); 
-    }
-
-    void Animation()
-    {
-        if (_direction != 0f)
-            _spriteRenderer.flipX = _direction < 0f;
-    }
-
-    void PlaySound(AudioClip clip)
-    {
-        if (_audioSource != null && clip != null)
-            _audioSource.PlayOneShot(clip);
     }
 
     void OnDrawGizmos()
@@ -340,7 +281,7 @@ public class EnemyAController : ObjectController
         GUILayout.Label($"_chargeDirection = {_chargeDirection}");
         GUILayout.Label($"_playerDetected = {_playerDetected}");
         GUILayout.Label($"_canJump = {_canJump}");
-        GUILayout.Label($"_canCharge = {_canCharge}");
+        GUILayout.Label($"_canAttack = {_canAttack}");
         GUILayout.Label($"_isPaused = {_isPaused}");
         GUILayout.Label($"_isCharging = {_isCharging}");
         GUILayout.Label($"_isStunned = {_isStunned}");

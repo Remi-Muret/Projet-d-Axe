@@ -20,7 +20,7 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     moveSpeed: 5
     jumpForce: 0
-    health: 4
+    health: 6
     meleeDamage: 1
     waitDuration: 0.2
     detectionRadius: 5

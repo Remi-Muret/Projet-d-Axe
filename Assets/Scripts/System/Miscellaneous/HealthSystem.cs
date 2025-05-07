@@ -23,7 +23,7 @@ public class HealthSystem : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         if (_spriteRenderer != null)
-            _originalColor = _spriteRenderer.color;
+            _originalColor = GameManager.Instance.GetPlayerData().color;
 
         switch (characterType)
         {

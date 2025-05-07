@@ -1,69 +1,26 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyBController : ObjectController
+public class EnemyBController : EnemyController
 {
-    [Header("Debug")]
-    [SerializeField] private bool _guiDebug;
-    [SerializeField] private bool _showGizmos;
-
-    [Header("Set up")]
-    [SerializeField] private int _id;
-    [SerializeField] private bool _reverseOrientation;
-
-    public int Id => _id;
-
-    [Header("Bomb")]
-    [SerializeField] private GameObject _bombPrefab;
-
-    [Header("Ground check")]
-    [SerializeField] private LayerMask _groundLayer;
-
     private EnemyBData _enemyBData;
-    private GameObject _player;
-
-    private Color _originalColor;
-    private Vector2 _startPosition;
-    private Vector2 _patrolTargetA;
-    private Vector2 _patrolTargetB;
-
-    private float _direction;
-    private float _patrolPauseTimer;
-    private bool _playerDetected;
-    private bool _canBomb;
-    private bool _moveToPointA;
-    private bool _isPaused;
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    protected override void Start()
-    {
-        Init();
-    }
 
     protected override void Init()
     {
+        _data = GameManager.Instance.GetEnemyBData(_id);
         _enemyBData = GameManager.Instance.GetEnemyBData(_id);
-        _player = GameObject.FindWithTag("Player");
 
         base.Init();
 
-        _startPosition = transform.position;
         _patrolTargetA = _startPosition + _enemyBData.patrolPointA;
         _patrolTargetB = _startPosition + _enemyBData.patrolPointB;
-
-        _moveToPointA = !_reverseOrientation;
-        _canBomb = true;
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         Move();
-        Patrol();
-        Animation();
 
         if (_player == null)
         {
@@ -71,13 +28,10 @@ public class EnemyBController : ObjectController
             if (_player == null) return;
         }
 
-        if (DetectPlayer() && _canBomb)
+        Patrol();
+
+        if (DetectPlayer() && _canAttack)
             StartCoroutine(Bomb()); 
-    }
-    
-    void Update()
-    {
-        Animation();
     }
 
     bool DetectPlayer()
@@ -130,12 +84,12 @@ public class EnemyBController : ObjectController
 
     IEnumerator Bomb()
     {
-        _canBomb = false;
+        _canAttack = false;
         Instantiate(_bombPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 
         yield return new WaitForSeconds(_enemyBData.bombCooldown);
 
-        _canBomb = true;
+        _canAttack = true;
     }
 
     void Move()
@@ -146,9 +100,10 @@ public class EnemyBController : ObjectController
     void OnTriggerEnter2D(Collider2D collider)
     {
         PlayerData _playerData = GameManager.Instance.GetPlayerData();
+        HealthSystem healthSystem = GetComponent<HealthSystem>();
+
         if (collider.CompareTag("Player Attack"))
         {
-            HealthSystem healthSystem = GetComponent<HealthSystem>();
             if (healthSystem != null)
             {
                 ItemController item = collider.GetComponent<ItemController>();
@@ -175,18 +130,6 @@ public class EnemyBController : ObjectController
                 }
             }
         }
-    }
-
-    void Animation()
-    {
-        if (_direction != 0f)
-            _spriteRenderer.flipX = _direction < 0f;
-    }
-
-    void PlaySound(AudioClip clip)
-    {
-        if (_audioSource != null && clip != null)
-            _audioSource.PlayOneShot(clip);
     }
 
     void OnDrawGizmos()
@@ -218,7 +161,7 @@ public class EnemyBController : ObjectController
         GUILayout.Label(gameObject.name);
         GUILayout.Label($"_direction = {_direction}");
         GUILayout.Label($"_playerDetected = {_playerDetected}");
-        GUILayout.Label($"_canBomb = {_canBomb}");
+        GUILayout.Label($"_canBomb = {_canAttack}");
         GUILayout.Label($"_isPaused = {_isPaused}");
         GUILayout.EndVertical();
     }

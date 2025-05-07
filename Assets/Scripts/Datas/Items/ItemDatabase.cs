@@ -18,18 +18,18 @@ public class ItemDatabase : ScriptableObject
     {
         public string label;
         public Category category;
-        public List<ObjectData> items = new();
+        public List<ItemData> items = new();
     }
 
     [SerializeField] private List<ItemCategoryGroup> _categoryGroups = new();
 
-    public List<ObjectData> GetItemsByCategory(Category category)
+    public List<ItemData> GetItemsByCategory(Category category)
     {
         var group = _categoryGroups.Find(g => g.category == category);
         return group != null ? group.items : null;
     }
 
-    public ObjectData GetData(Category category, int id)
+    public ItemData GetData(Category category, int id)
     {
         var group = _categoryGroups.Find(g => g.category == category);
         return (group != null && id >= 0 && id < group.items.Count) ? group.items[id] : null;

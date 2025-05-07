@@ -50,14 +50,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710d378bce721de4d80c71e92789b276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data:
+    label: 
+    scale: 0
+    gravity: 0
+    sprite: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
   _guiDebug: 0
   _showGizmos: 1
-  id: 0
-  _reverseOrientation: 0
-  _bombPrefab: {fileID: 4194121891865127377, guid: ff1e6e391064b7d45aa2a3707bc61e80, type: 3}
+  _groundChecker: {fileID: 0}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  _bombPrefab: {fileID: 4194121891865127377, guid: ff1e6e391064b7d45aa2a3707bc61e80, type: 3}
+  _projectilePrefab: {fileID: 0}
+  _jumpSound: {fileID: 0}
+  _attackSound: {fileID: 0}
+  _hitSound: {fileID: 0}
+  _id: 0
+  _reverseOrientation: 0
 --- !u!114 &6955903906175933128
 MonoBehaviour:
   m_ObjectHideFlags: 0

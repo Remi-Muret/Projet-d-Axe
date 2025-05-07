@@ -43,7 +43,7 @@ MonoBehaviour:
     detectionRadius: 8
     patrolPointA: {x: 3, y: 0}
     patrolPointB: {x: -3, y: 0}
-    chargeSpeed: 10
+    chargeSpeed: 8
     chargeDuration: 1
     chargeCooldown: 1
     hitstunDuration: 0.5

@@ -16,21 +16,30 @@ MonoBehaviour:
   - label: Power
     category: 0
     items:
-    - label: Bomb
+    - label: Bomb Power
       scale: 1
       gravity: 0
       sprite: {fileID: 0}
       color: {r: 1, g: 0, b: 0, a: 1}
-    - label: Melee
+      value: 0
+      recovery: 0
+      damage: 0
+    - label: Melee Power
       scale: 1
       gravity: 0
       sprite: {fileID: 0}
       color: {r: 1, g: 0.33333334, b: 0, a: 1}
-    - label: Projectile
+      value: 0
+      recovery: 0
+      damage: 0
+    - label: Projectile Power
       scale: 1
       gravity: 0
       sprite: {fileID: 0}
       color: {r: 1, g: 0.6666667, b: 0, a: 1}
+      value: 0
+      recovery: 0
+      damage: 0
   - label: Coin
     category: 1
     items:
@@ -39,16 +48,25 @@ MonoBehaviour:
       gravity: 3
       sprite: {fileID: 0}
       color: {r: 0.33333325, g: 1, b: 0, a: 1}
+      value: 1
+      recovery: 0
+      damage: 0
     - label: Coin 5
       scale: 1
       gravity: 3
       sprite: {fileID: 0}
       color: {r: 0, g: 1, b: 0.3333335, a: 1}
+      value: 5
+      recovery: 0
+      damage: 0
     - label: Coin 10
       scale: 1
       gravity: 3
       sprite: {fileID: 0}
       color: {r: 0, g: 1, b: 0.66666675, a: 1}
+      value: 10
+      recovery: 0
+      damage: 0
   - label: Life
     category: 2
     items:
@@ -57,16 +75,25 @@ MonoBehaviour:
       gravity: 0
       sprite: {fileID: 0}
       color: {r: 0, g: 0, b: 1, a: 1}
+      value: 0
+      recovery: 1
+      damage: 0
     - label: Life 2
       scale: 1
       gravity: 0
       sprite: {fileID: 0}
       color: {r: 0.33333302, g: 0, b: 1, a: 1}
+      value: 0
+      recovery: 2
+      damage: 0
     - label: Life 3
       scale: 1
       gravity: 0
       sprite: {fileID: 0}
       color: {r: 0.666667, g: 0, b: 1, a: 1}
+      value: 0
+      recovery: 3
+      damage: 0
   - label: Player Attack
     category: 3
     items:
@@ -75,11 +102,17 @@ MonoBehaviour:
       gravity: 3
       sprite: {fileID: 0}
       color: {r: 1, g: 1, b: 1, a: 1}
+      value: 0
+      recovery: 0
+      damage: 0
     - label: Player Projectile
       scale: 1
       gravity: 0
       sprite: {fileID: 0}
       color: {r: 1, g: 1, b: 1, a: 1}
+      value: 0
+      recovery: 0
+      damage: 0
   - label: Enemy Attack
     category: 4
     items:
@@ -88,3 +121,6 @@ MonoBehaviour:
       gravity: 3
       sprite: {fileID: 0}
       color: {r: 1, g: 1, b: 1, a: 1}
+      value: 0
+      recovery: 0
+      damage: 0

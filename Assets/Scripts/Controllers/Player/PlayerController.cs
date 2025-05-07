@@ -2,38 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : FigureController
 {
-    [Header("Debug")]
-    [SerializeField] private bool guiDebug;
-
-    [Header("Checkers")]
-    [SerializeField] private Transform playerGroundChecker;
-    [SerializeField] private Transform playerWallCheckerRight;
-    [SerializeField] private Transform playerWallCheckerLeft;
-    [SerializeField] private LayerMask groundLayer;
+    [Header("Wall Checkers")]
+    [SerializeField] private Transform _wallCheckerRight;
+    [SerializeField] private Transform _wallCheckerLeft;
 
     [Header("Attacks")]
-    [SerializeField] private Collider2D playerHitboxRight;
-    [SerializeField] private Collider2D playerHitboxLeft;
-    [SerializeField] private GameObject bombPrefab;
-    [SerializeField] private GameObject projectilePrefab;
-
-    [Header("Audio")]
-    [SerializeField] private AudioClip jumpSound;
-    [SerializeField] private AudioClip dodgeSound;
-    [SerializeField] private AudioClip attackSound;
-    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private Collider2D _hitboxRight;
+    [SerializeField] private Collider2D _hitboxLeft;
 
     private PlayerData _playerData;
-    private AudioSource _audioSource;
-    private Collider2D _collider;
-    private Rigidbody2D _rigidbody2D;
-    private SpriteRenderer _spriteRenderer;
-    private Color _originalColor;
+
+    private Vector2 _wallCheckerBoxSize = new Vector2(0f, 1.5f);
 
     private float _horizontalInput;
     private float _verticalInput;
+    private float _lastBombTime;
+    private float _lastProjectileTime;
+
     private bool _isDirectionLocked;
     private bool _isJumping;
     private bool _isWallSliding;
@@ -42,40 +29,31 @@ public class PlayerController : MonoBehaviour
     private bool _isInvulnerable;
     private bool _isKnockedBack;
     private bool _wallSlideCooldown;
-
     private bool _bombForm;
     private bool _meleeForm;
     private bool _projectileForm;
 
-    private float _lastBombTime;
-    private float _lastProjectileTime;
-
     private string _currentState;
 
-    private Vector2 _groundCheckerBoxSize = new Vector2(0.98f, 0f);
-    private Vector2 _wallCheckerBoxSize = new Vector2(0f, 1.5f);
-
-    void Awake()
+    protected override void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
-        _collider = GetComponent<Collider2D>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        base.Awake();
     }
 
-    void Start()
+    protected override void Start()
     {
-        _playerData = GameManager.Instance.GetPlayerData();
-        _originalColor = _spriteRenderer.color;
+        Init();
+        StartCoroutine(InvulnerabilityTime());
+    }
 
-        _spriteRenderer.sprite = _playerData.sprite;
-        transform.localScale = Vector3.one * _playerData.scaleCoef;
-        _rigidbody2D.gravityScale = _playerData.gravity;
-        _originalColor = _playerData.color;
+    protected override void Init()
+    {
+        _data = GameManager.Instance.GetPlayerData();
+        _playerData = GameManager.Instance.GetPlayerData();
+
+        base.Init();
 
         _isInvulnerable = true;
-
-        StartCoroutine(InvulnerabilityTime());
     }
 
     void FixedUpdate()
@@ -96,11 +74,11 @@ public class PlayerController : MonoBehaviour
         Animation();
     }
 
-    bool CheckGroundCollision() => Physics2D.OverlapBox(playerGroundChecker.position, _groundCheckerBoxSize, 0f, groundLayer);
+    bool CheckGroundCollision() => Physics2D.OverlapBox(_groundChecker.position, _groundCheckerBoxSize, 0f, _groundLayer);
     
-    bool CheckWallCollisionRight() => Physics2D.OverlapBox(playerWallCheckerRight.position, _wallCheckerBoxSize, 0f, groundLayer);
+    bool CheckWallCollisionRight() => Physics2D.OverlapBox(_wallCheckerRight.position, _wallCheckerBoxSize, 0f, _groundLayer);
     
-    bool CheckWallCollisionLeft() => Physics2D.OverlapBox(playerWallCheckerLeft.position, _wallCheckerBoxSize, 0f, groundLayer);
+    bool CheckWallCollisionLeft() => Physics2D.OverlapBox(_wallCheckerLeft.position, _wallCheckerBoxSize, 0f, _groundLayer);
 
     void HandleInputs()
     {
@@ -145,7 +123,7 @@ public class PlayerController : MonoBehaviour
             _isJumping = true;
             _rigidbody2D.linearVelocity = new Vector2(_rigidbody2D.linearVelocity.x, _playerData.jumpForce);
 
-            PlaySound(jumpSound);
+            PlaySound(_jumpSound);
 
             yield return new WaitForSeconds(_playerData.jumpDuration);
 
@@ -225,29 +203,29 @@ public class PlayerController : MonoBehaviour
             float adjustedAttackDuration = _playerData.minAttackDuration + holdTime;
         
             _isInvulnerable = true;
-            if (playerHitboxRight != null && playerHitboxLeft != null)
+            if (_hitboxRight != null && _hitboxLeft != null)
             {
                 if (_spriteRenderer.flipX)
                 {
-                    playerHitboxRight.enabled = false;
-                    playerHitboxLeft.enabled = true;
+                    _hitboxRight.enabled = false;
+                    _hitboxLeft.enabled = true;
                     _rigidbody2D.linearVelocity = new Vector2(-_playerData.dashSpeed, 0f);
                 }
                 else
                 {
-                    playerHitboxRight.enabled = true;
-                    playerHitboxLeft.enabled = false;
+                    _hitboxRight.enabled = true;
+                    _hitboxLeft.enabled = false;
                     _rigidbody2D.linearVelocity = new Vector2(_playerData.dashSpeed, 0f);
                 }
             }
 
             StartCoroutine(Colorize(Color.yellow, adjustedAttackDuration));
-            PlaySound(attackSound);
+            PlaySound(_attackSound);
 
             yield return new WaitForSeconds(adjustedAttackDuration);
         
-            playerHitboxRight.enabled = false;
-            playerHitboxLeft.enabled = false;
+            _hitboxRight.enabled = false;
+            _hitboxLeft.enabled = false;
             _isDirectionLocked = false;
             _isInvulnerable = false;
             _isAttacking = false;
@@ -270,7 +248,7 @@ public class PlayerController : MonoBehaviour
 
         _lastProjectileTime = Time.time;
 
-        GameObject projectile = Instantiate(projectilePrefab, new Vector3(transform.position.x + offsetX, transform.position.y, transform.position.z), Quaternion.identity);
+        GameObject projectile = Instantiate(_projectilePrefab, new Vector3(transform.position.x + offsetX, transform.position.y, transform.position.z), Quaternion.identity);
         Vector2 direction = Vector2.right;
         Rigidbody2D _rigidbody2D = projectile.GetComponent<Rigidbody2D>();
         SpriteRenderer sprite = projectile.GetComponent<SpriteRenderer>();
@@ -295,7 +273,7 @@ public class PlayerController : MonoBehaviour
 
         _lastBombTime = Time.time;
 
-        GameObject bomb = Instantiate(bombPrefab, new Vector3(transform.position.x + offsetX, transform.position.y, transform.position.z), Quaternion.Euler(0f, 0f, angle));
+        GameObject bomb = Instantiate(_bombPrefab, new Vector3(transform.position.x + offsetX, transform.position.y, transform.position.z), Quaternion.Euler(0f, 0f, angle));
         Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
         Rigidbody2D _rigidbody2D = bomb.GetComponent<Rigidbody2D>();
         if (_spriteRenderer.flipX)
@@ -328,7 +306,7 @@ public class PlayerController : MonoBehaviour
                 _rigidbody2D.linearVelocity = new Vector2(-_playerData.knockbackX, _playerData.knockbackY);
         }
 
-        PlaySound(hitSound);
+        PlaySound(_hitSound);
 
         yield return new WaitForSeconds(0.1f);
 
@@ -361,7 +339,7 @@ public class PlayerController : MonoBehaviour
             foreach (GameObject obj in objectsWithTag)
             {
                 Collider2D objectCollider = obj.GetComponent<Collider2D>();
-                Physics2D.IgnoreCollision(_collider, objectCollider, true);
+                Physics2D.IgnoreCollision(_collider2D, objectCollider, true);
             }
         }
     }
@@ -378,44 +356,16 @@ public class PlayerController : MonoBehaviour
             foreach (GameObject obj in objectsWithTag)
             {
                 Collider2D objectCollider = obj.GetComponent<Collider2D>();
-                Physics2D.IgnoreCollision(_collider, objectCollider, false);
+                Physics2D.IgnoreCollision(_collider2D, objectCollider, false);
             }
         }
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Enemy") && !_isInvulnerable)
-        {
-            HealthSystem healthSystem = GetComponent<HealthSystem>();
-
-            EnemyAController enemyA = collision.collider.GetComponent<EnemyAController>();
-            if (enemyA != null)
-            {
-                EnemyAData enemyAData = GameManager.Instance.GetEnemyAData(enemyA.Id);
-                if (healthSystem != null)
-                    healthSystem.TakeDamage(enemyAData.meleeDamage);
-
-                StartCoroutine(ApplyKnockback());
-                return;
-            }
-            EnemyBController enemyB = collision.collider.GetComponent<EnemyBController>();
-            if (enemyB != null)
-            {
-                EnemyBData enemyBData = GameManager.Instance.GetEnemyBData(enemyB.Id);
-                if (healthSystem != null)
-                    healthSystem.TakeDamage(enemyBData.meleeDamage);
-
-                StartCoroutine(ApplyKnockback());
-                return;
-            }
-        }
-    }
-
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         ItemController item = collider.GetComponent<ItemController>();
+        HealthSystem healthSystem = GetComponent<HealthSystem>();
+
         if (item != null && item.Category == ItemDatabase.Category.Power)
         {
             switch (item.Id)
@@ -439,6 +389,60 @@ public class PlayerController : MonoBehaviour
 
             item.gameObject.SetActive(false);
         }
+
+        if (collider.CompareTag("Enemy Attack"))
+        {
+            if (healthSystem != null)
+            {
+                if (item != null && item.Category == ItemDatabase.Category.EnemyAttack)
+                {
+                    int damage = 0;
+                    switch (item.Id)
+                    {
+                        case 0:
+                            damage = _playerData.bombDamage;
+                            break;
+                        default:
+                            damage = _playerData.meleeDamage;
+                            break;
+                    }
+                    healthSystem.TakeDamage(damage);
+                }
+                else
+                {
+                    healthSystem.TakeDamage(_playerData.meleeDamage);
+                }
+            }
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        HealthSystem healthSystem = GetComponent<HealthSystem>();
+        if (collision.collider.CompareTag("Enemy") && !_isInvulnerable)
+        {
+            EnemyAController enemyA = collision.collider.GetComponent<EnemyAController>();
+            if (enemyA != null)
+            {
+                EnemyAData enemyAData = GameManager.Instance.GetEnemyAData(enemyA.Id);
+                if (healthSystem != null)
+                    healthSystem.TakeDamage(enemyAData.meleeDamage);
+
+                StartCoroutine(ApplyKnockback());
+                return;
+            }
+
+            EnemyBController enemyB = collision.collider.GetComponent<EnemyBController>();
+            if (enemyB != null)
+            {
+                EnemyBData enemyBData = GameManager.Instance.GetEnemyBData(enemyB.Id);
+                if (healthSystem != null)
+                    healthSystem.TakeDamage(enemyBData.meleeDamage);
+
+                StartCoroutine(ApplyKnockback());
+                return;
+            }
+        }
     }
 
     void Animation()
@@ -458,12 +462,6 @@ public class PlayerController : MonoBehaviour
             _spriteRenderer.flipX = _horizontalInput < 0f;
     }
 
-    void PlaySound(AudioClip clip)
-    {
-        if (_audioSource != null && clip != null)
-            _audioSource.PlayOneShot(clip);
-    }
-
     IEnumerator Colorize(Color flashColor, float duration)
     {
         if (_spriteRenderer != null)
@@ -472,13 +470,13 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForSeconds(duration);
 
-            _spriteRenderer.color = _originalColor;
+            _spriteRenderer.color = _data.color;
         }
     }
 
     void OnGUI()
     {
-        if (!guiDebug) return;
+        if (!_guiDebug) return;
 
         GUILayout.BeginVertical(GUI.skin.box);
         GUILayout.Label(gameObject.name);

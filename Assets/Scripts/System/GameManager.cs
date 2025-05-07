@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private PlayerData _playerData;
+    [SerializeField] private PlayerDatabase _playerDatabase;
     [SerializeField] private EnemyADatabase _enemyADatabase;
     [SerializeField] private EnemyBDatabase _enemyBDatabase;
     [SerializeField] private ItemDatabase _itemDatabase;
@@ -26,13 +26,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public PlayerData GetPlayerData() => _playerData;
+    public PlayerData GetPlayerData() => _playerDatabase.GetData();
 
-    public EnemyAData GetEnemyAData(int id) => _enemyADatabase.GetEnemyAData(id);
+    public EnemyAData GetEnemyAData(int id) => _enemyADatabase.GetData(id);
 
-    public EnemyBData GetEnemyBData(int id) => _enemyBDatabase.GetEnemyBData(id);
+    public EnemyBData GetEnemyBData(int id) => _enemyBDatabase.GetData(id);
 
-    public ObjectData GetItemData(ItemDatabase.Category category, int id) => _itemDatabase.GetData(category, id);
+    public ItemData GetItemData(ItemDatabase.Category category, int id) => _itemDatabase.GetData(category, id);
 
     public void RegisterCheckpoint(CheckpointData checkpoint)
     {
@@ -46,10 +46,13 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        TimeSystem timeSystem = FindFirstObjectByType<TimeSystem>();
-        if (timeSystem != null)
-            timeSystem.ResetTimer();
+        if (FindFirstObjectByType<PlayerController>() == null)
+        {
+            TimeSystem timeSystem = FindFirstObjectByType<TimeSystem>();
+            if (timeSystem != null)
+                timeSystem.ResetTimer();
 
-        Instantiate(_playerPrefab, position, Quaternion.identity);
+            Instantiate(_playerPrefab, position, Quaternion.identity);
+        }
     }
 }

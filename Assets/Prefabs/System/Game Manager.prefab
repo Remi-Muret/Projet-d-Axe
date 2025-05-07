@@ -45,10 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f4f06935fb7c564c9a97c6ea049ebef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerData: {fileID: 11400000, guid: 6718ae85c939f494485d09adc9258ec9, type: 2}
+  _playerDatabase: {fileID: 11400000, guid: 6718ae85c939f494485d09adc9258ec9, type: 2}
   _enemyADatabase: {fileID: 11400000, guid: 8f222299567796349b51935db6e8323c, type: 2}
   _enemyBDatabase: {fileID: 11400000, guid: d6688dc4d3b928047a7c52aa28df35a9, type: 2}
-  _enemyBombDatabase: {fileID: 11400000, guid: 7a400f598c9714447af455db7ca5fd59, type: 2}
   _itemDatabase: {fileID: 11400000, guid: 26144ce3fbe6ea244bb2a7215a159501, type: 2}
   _playerPrefab: {fileID: 2082363596615786544, guid: 70aff4e96539f2a4dbd496e3248414eb, type: 3}
 --- !u!114 &935042152660539311

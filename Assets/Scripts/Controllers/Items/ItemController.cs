@@ -11,6 +11,8 @@ public class ItemController : ObjectController
     [SerializeField] private GameObject enemyExplosionPrefab;
     [SerializeField] private float explosionDuration;
 
+    private ItemData _itemData;
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,6 +30,7 @@ public class ItemController : ObjectController
     protected override void Init()
     {
         _data = GameManager.Instance.GetItemData(Category, _id);
+        _itemData = GameManager.Instance.GetItemData(Category, _id);
 
         base.Init();
     }
@@ -78,7 +81,6 @@ public class ItemController : ObjectController
             Category == ItemDatabase.Category.EnemyAttack)
             Destroy(gameObject);
     }
-
 
     void SpawnExplosion()
     {

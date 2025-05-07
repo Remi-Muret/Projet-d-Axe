@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ObjectController : MonoBehaviour
 {
-    [Header("Data")]
     [SerializeField] protected ObjectData _data;
 
     protected AudioSource _audioSource;

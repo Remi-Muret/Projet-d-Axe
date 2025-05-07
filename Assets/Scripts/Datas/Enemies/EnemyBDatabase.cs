@@ -6,7 +6,7 @@ public class EnemyBDatabase : ScriptableObject
 {
 	[SerializeField] private List<EnemyBData> enemyBData = new();
 
-	public EnemyBData GetEnemyBData(int id)
+	public EnemyBData GetData(int id)
 	{
 		id = Mathf.Clamp(id, 0, enemyBData.Count - 1);
 		return enemyBData[id];
