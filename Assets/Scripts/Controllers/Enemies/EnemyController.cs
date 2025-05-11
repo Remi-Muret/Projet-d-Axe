@@ -25,16 +25,6 @@ public class EnemyController : FigureController
     protected bool _moveToPointA;
     protected bool _isPaused;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    protected override void Start()
-    {
-        Init();
-    }
-
     protected override void Init()
     {
         base.Init();
@@ -43,6 +33,8 @@ public class EnemyController : FigureController
 
         _canAttack = true;
         _moveToPointA = !_reverseOrientation;
+
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     protected virtual void FixedUpdate()
@@ -58,12 +50,10 @@ public class EnemyController : FigureController
             _facingLeft = false;
         }
 
-        Animation();
-    }
-
-    protected void Animation()
-    {
-        if (_direction != 0f)
-            _spriteRenderer.flipX = _direction < 0f;
+        if (_player == null)
+        {
+            _player = GameObject.FindGameObjectWithTag("Player");
+            if (_player == null) return;
+        }
     }
 }

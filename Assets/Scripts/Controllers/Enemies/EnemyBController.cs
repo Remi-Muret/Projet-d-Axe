@@ -21,21 +21,23 @@ public class EnemyBController : EnemyController
         base.FixedUpdate();
 
         Move();
-
-        if (_player == null)
-        {
-            _player = GameObject.FindGameObjectWithTag("Player");
-            if (_player == null) return;
-        }
-
         Patrol();
+        Animation();
 
         if (DetectPlayer() && _canAttack)
-            StartCoroutine(Bomb()); 
+            StartCoroutine(Bomb());
+
+    }
+
+    public void SetId(int id)
+    {
+        _id = id;
     }
 
     bool DetectPlayer()
     {
+        if (_player == null) return false;
+
         Vector2 directionToPlayer = (_player.transform.position - transform.position).normalized;
         float distanceToPlayer = Vector2.Distance(transform.position, _player.transform.position);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, distanceToPlayer, _groundLayer);
@@ -132,6 +134,12 @@ public class EnemyBController : EnemyController
         }
     }
 
+    protected void Animation()
+    {
+        if (_direction != 0f)
+            _spriteRenderer.flipX = _direction < 0f;
+    }
+
     void OnDrawGizmos()
     {
         if (!_showGizmos) return;
@@ -139,8 +147,8 @@ public class EnemyBController : EnemyController
         Gizmos.color = Color.red;
 
         Vector2 startPos = Application.isPlaying ? _startPosition : (Vector2)transform.position;
-        Vector2 pointA = startPos + (_enemyBData != null ? _enemyBData.patrolPointA : Vector2.left * 2f);
-        Vector2 pointB = startPos + (_enemyBData != null ? _enemyBData.patrolPointB : Vector2.right * 2f);
+        Vector2 pointA = startPos + (_enemyBData != null ? _enemyBData.patrolPointA : Vector2.left);
+        Vector2 pointB = startPos + (_enemyBData != null ? _enemyBData.patrolPointB : Vector2.right);
 
         Gizmos.DrawWireSphere(pointA, 0.2f);
         Gizmos.DrawWireSphere(pointB, 0.2f);

@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6034542504199169960}
   - component: {fileID: 4782485568016540669}
-  - component: {fileID: 721715716211159993}
+  - component: {fileID: -7139978344339196287}
   - component: {fileID: 5427009412977123354}
   - component: {fileID: 1595456978400125472}
   - component: {fileID: 8937528684845823575}
@@ -82,16 +82,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9efd24c91463e8346a3bf76f6956a412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data:
+    label: 
+    scale: 0
+    gravity: 0
+    sprite: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
   _guiDebug: 0
   _showGizmos: 1
-  id: 0
-  _reverseOrientation: 0
+  _groundChecker: {fileID: 940876401710216603}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  _groundChecker: {fileID: 940876401710216603}
-  _groundCheckerBoxSize: {x: 0.98, y: 0}
---- !u!114 &721715716211159993
+  _bombPrefab: {fileID: 0}
+  _projectilePrefab: {fileID: 0}
+  _jumpSound: {fileID: 0}
+  _attackSound: {fileID: 0}
+  _hitSound: {fileID: 0}
+  _id: 0
+  _reverseOrientation: 0
+--- !u!114 &-7139978344339196287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,7 +110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5736905275195457614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa5e74950b0f286419bcc6527ead5543, type: 3}
+  m_Script: {fileID: 11500000, guid: e8bc5b2d07b43324b9c904ef13145072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterType: 1

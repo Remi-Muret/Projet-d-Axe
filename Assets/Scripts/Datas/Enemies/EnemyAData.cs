@@ -4,6 +4,9 @@ using UnityEngine;
 [Serializable]
 public class EnemyAData : EnemyData
 {
+    [Header("Enemy A Prefab")]
+    public GameObject Prefab;
+
     [Header("Charge Settings")]
     public float chargeSpeed;
     public float chargeDuration;

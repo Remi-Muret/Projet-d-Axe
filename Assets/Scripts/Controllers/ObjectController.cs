@@ -34,12 +34,10 @@ public class ObjectController : MonoBehaviour
         if (_rigidbody2D != null)
             _rigidbody2D.gravityScale = _data.gravity;
 
-        if (_spriteRenderer != null)
+        if (_spriteRenderer != null && _data.sprite != null)
         {
-            if (_data.sprite != null)
-                _spriteRenderer.sprite = _data.sprite;
+            _spriteRenderer.sprite = _data.sprite;
+            _spriteRenderer.color = _data.color;
         }
-
-        _spriteRenderer.color = _data.color;
     }
 }

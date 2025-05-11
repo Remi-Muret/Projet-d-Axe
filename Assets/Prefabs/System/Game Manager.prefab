@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3669553492802058792}
   - component: {fileID: 1410772311538828519}
-  - component: {fileID: 935042152660539311}
+  - component: {fileID: 5481594308529172301}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4053719454993203734}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   _enemyBDatabase: {fileID: 11400000, guid: d6688dc4d3b928047a7c52aa28df35a9, type: 2}
   _itemDatabase: {fileID: 11400000, guid: 26144ce3fbe6ea244bb2a7215a159501, type: 2}
   _playerPrefab: {fileID: 2082363596615786544, guid: 70aff4e96539f2a4dbd496e3248414eb, type: 3}
---- !u!114 &935042152660539311
+--- !u!114 &5481594308529172301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,8 +59,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4053719454993203734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49b6a0292a3ed4042a06915e1125aac5, type: 3}
+  m_Script: {fileID: 11500000, guid: 592433430f173a74ab64b9ada599667a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timer: 20
-  _deactivateTimer: 1
+  _timer: 15
+  _deactivateTimer: 0

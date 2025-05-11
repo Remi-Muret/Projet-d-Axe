@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : FigureController
 {
+    public PlayerController Instance { get; private set; }
+
     [Header("Wall Checkers")]
     [SerializeField] private Transform _wallCheckerRight;
     [SerializeField] private Transform _wallCheckerLeft;
@@ -38,6 +40,11 @@ public class PlayerController : FigureController
     protected override void Awake()
     {
         base.Awake();
+
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     protected override void Start()
@@ -387,31 +394,33 @@ public class PlayerController : FigureController
                     break;
             }
 
-            item.gameObject.SetActive(false);
+            Destroy(item.gameObject);
         }
 
-        if (collider.CompareTag("Enemy Attack"))
+        if (item != null && item.Category == ItemDatabase.Category.Life)
+        {
+            TimeSystem.Instance.AddTime(item.ItemData.recovery);
+            Destroy(item.gameObject);
+        }
+
+        if (collider.CompareTag("Enemy Attack") && !_isInvulnerable)
         {
             if (healthSystem != null)
             {
+                int damage = 0;
                 if (item != null && item.Category == ItemDatabase.Category.EnemyAttack)
                 {
-                    int damage = 0;
-                    switch (item.Id)
-                    {
-                        case 0:
-                            damage = _playerData.bombDamage;
-                            break;
-                        default:
-                            damage = _playerData.meleeDamage;
-                            break;
-                    }
-                    healthSystem.TakeDamage(damage);
+                    if (item.Id == 0)
+                        damage = item.ItemData.damage;
+                    else
+                        damage = 1;
                 }
                 else
                 {
-                    healthSystem.TakeDamage(_playerData.meleeDamage);
+                    damage = 1;
                 }
+
+                healthSystem.TakeDamage(damage);
             }
         }
     }

@@ -17,15 +17,33 @@ MonoBehaviour:
     scale: 1
     gravity: 0
     sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
-    color: {r: 1, g: 1, b: 1, a: 1}
+    color: {r: 0.5019608, g: 0.5019608, b: 1, a: 1}
+    moveSpeed: 2
+    jumpForce: 0
+    health: 5
+    meleeDamage: 1
+    waitDuration: 0.6
+    detectionRadius: 5
+    patrolPointA: {x: 1, y: 0}
+    patrolPointB: {x: -1, y: 0}
+    Prefab: {fileID: 4229857568404688776, guid: 646ba777af9cdf844905ea6b0ee99ce6, type: 3}
+    bombCooldown: 1.2
+    detectionMinAngle: -180
+    detectionMaxAngle: 0
+  - label: Enemy B 2
+    scale: 1
+    gravity: 0
+    sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
+    color: {r: 0.5019608, g: 0.5019608, b: 1, a: 1}
     moveSpeed: 5
     jumpForce: 0
-    health: 6
+    health: 5
     meleeDamage: 1
-    waitDuration: 0.2
+    waitDuration: 0.6
     detectionRadius: 5
-    patrolPointA: {x: 5, y: 0}
-    patrolPointB: {x: -5, y: 0}
-    bombCooldown: 0.5
+    patrolPointA: {x: 3, y: 0}
+    patrolPointB: {x: -3, y: 0}
+    Prefab: {fileID: 4229857568404688776, guid: 646ba777af9cdf844905ea6b0ee99ce6, type: 3}
+    bombCooldown: 0.9
     detectionMinAngle: -180
     detectionMaxAngle: 0

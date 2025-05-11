@@ -22,21 +22,22 @@ public class HealthSystem : MonoBehaviour
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (_spriteRenderer != null)
-            _originalColor = GameManager.Instance.GetPlayerData().color;
 
         switch (characterType)
         {
             case CHARACTER.Player:
+                _originalColor = GameManager.Instance.GetPlayerData().color;
                 _health = GameManager.Instance.GetPlayerData().health;
                 _respawnDelay = GameManager.Instance.GetPlayerData().respawnDelay;
                 break;
             case CHARACTER.EnemyA:
                 int enemyAId = GetComponent<EnemyAController>().Id;
+                _originalColor = GameManager.Instance.GetEnemyAData(enemyAId).color;
                 _health = GameManager.Instance.GetEnemyAData(enemyAId).health;
                 break;
             case CHARACTER.EnemyB:
                 int enemyBId = GetComponent<EnemyBController>().Id;
+                _originalColor = GameManager.Instance.GetEnemyBData(enemyBId).color;
                 _health = GameManager.Instance.GetEnemyBData(enemyBId).health;
                 break;
         }
@@ -59,10 +60,11 @@ public class HealthSystem : MonoBehaviour
         {
             case CHARACTER.Player:
                 Vector2 respawnPosition = GameManager.Instance.GetLastCheckpointPosition();
-                GameManager.Instance.StartCoroutine(GameManager.Instance.RespawnPlayerAfterDelay(_respawnDelay, respawnPosition));
+                float respawnDelay = GameManager.Instance.GetPlayerData().respawnDelay;
+
+                GameManager.Instance.StartCoroutine(GameManager.Instance.Respawn(respawnDelay, respawnPosition));
                 Destroy(gameObject);
                 break;
-
             default:
                 Destroy(gameObject);
                 break;

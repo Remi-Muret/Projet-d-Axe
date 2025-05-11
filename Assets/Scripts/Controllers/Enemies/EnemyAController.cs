@@ -10,25 +10,15 @@ public class EnemyAController : EnemyController
     private bool _isCharging;
     private bool _isStunned;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    protected override void Start()
-    {
-        Init();
-
-        _patrolTargetA = _startPosition + _enemyAData.patrolPointA;
-        _patrolTargetB = _startPosition + _enemyAData.patrolPointB;
-    }
-
     protected override void Init()
     {
         _data = GameManager.Instance.GetEnemyAData(_id);
         _enemyAData = GameManager.Instance.GetEnemyAData(_id);
         
         base.Init();
+
+        _patrolTargetA = _startPosition + _enemyAData.patrolPointA;
+        _patrolTargetB = _startPosition + _enemyAData.patrolPointB;
     }
 
     protected override void FixedUpdate()
@@ -38,23 +28,25 @@ public class EnemyAController : EnemyController
         LockedDirection();
         Move();
         Jump();
-
-        if (_player == null)
-        {
-            _player = GameObject.FindGameObjectWithTag("Player");
-            if (_player == null) return;
-        }
-
         Patrol();
+        Animation();
 
         if (DetectPlayer() && _canAttack)
-            StartCoroutine(Charge()); 
+            StartCoroutine(Charge());
+
+    }
+
+    public void SetId(int id)
+    {
+        _id = id;
     }
 
     bool CheckGroundCollision() => Physics2D.OverlapBox(_groundChecker.position, _groundCheckerBoxSize, 0f, _groundLayer);
 
     bool DetectPlayer()
     {
+        if (_player == null) return false;
+
         Vector2 directionToPlayer = (_player.transform.position - transform.position).normalized;
         float distanceToPlayer = Vector2.Distance(transform.position, _player.transform.position);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, distanceToPlayer, _groundLayer);
@@ -238,6 +230,12 @@ public class EnemyAController : EnemyController
             StartCoroutine(Hitstun()); 
     }
 
+    protected void Animation()
+    {
+        if (_direction != 0f)
+            _spriteRenderer.flipX = _direction < 0f;
+    }
+
     void OnDrawGizmos()
     {
         if (!_showGizmos) return;
@@ -245,8 +243,8 @@ public class EnemyAController : EnemyController
         Gizmos.color = Color.red;
 
         Vector2 startPos = Application.isPlaying ? _startPosition : (Vector2)transform.position;
-        Vector2 pointA = startPos + (_enemyAData != null ? _enemyAData.patrolPointA : Vector2.left * 2f);
-        Vector2 pointB = startPos + (_enemyAData != null ? _enemyAData.patrolPointB : Vector2.right * 2f);
+        Vector2 pointA = startPos + (_enemyAData != null ? _enemyAData.patrolPointA : Vector2.left);
+        Vector2 pointB = startPos + (_enemyAData != null ? _enemyAData.patrolPointB : Vector2.right);
 
         Gizmos.DrawWireSphere(pointA, 0.2f);
         Gizmos.DrawWireSphere(pointB, 0.2f);

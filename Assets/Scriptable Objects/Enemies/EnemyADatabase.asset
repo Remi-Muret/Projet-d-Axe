@@ -17,33 +17,71 @@ MonoBehaviour:
     scale: 1
     gravity: 3
     sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    moveSpeed: 3
+    color: {r: 0.5019608, g: 1, b: 0.5019608, a: 1}
+    moveSpeed: 4
     jumpForce: 12
-    health: 3
+    health: 5
     meleeDamage: 1
-    waitDuration: 1
-    detectionRadius: 8
-    patrolPointA: {x: 2, y: 0}
-    patrolPointB: {x: -2, y: 0}
+    waitDuration: 0.2
+    detectionRadius: 0
+    patrolPointA: {x: 1, y: 0}
+    patrolPointB: {x: -1, y: 0}
+    Prefab: {fileID: 5736905275195457614, guid: 080430e818e91e94098b4dbe7e898b95, type: 3}
     chargeSpeed: 10
-    chargeDuration: 1
+    chargeDuration: 0.6
     chargeCooldown: 1
     hitstunDuration: 1
-  - label: Enemy A 2
+  - label: Enemy A 1
     scale: 1
     gravity: 3
     sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    moveSpeed: 2
+    color: {r: 0.5019608, g: 1, b: 0.5019608, a: 1}
+    moveSpeed: 4
     jumpForce: 12
     health: 3
     meleeDamage: 1
-    waitDuration: 2
-    detectionRadius: 8
-    patrolPointA: {x: 3, y: 0}
-    patrolPointB: {x: -3, y: 0}
-    chargeSpeed: 8
-    chargeDuration: 1
+    waitDuration: 0.6
+    detectionRadius: 0
+    patrolPointA: {x: 2, y: 0}
+    patrolPointB: {x: -2, y: 0}
+    Prefab: {fileID: 5736905275195457614, guid: 080430e818e91e94098b4dbe7e898b95, type: 3}
+    chargeSpeed: 10
+    chargeDuration: 0.6
     chargeCooldown: 1
-    hitstunDuration: 0.5
+    hitstunDuration: 1
+  - label: Enemy A 1
+    scale: 1
+    gravity: 3
+    sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
+    color: {r: 1, g: 0.5, b: 0.5, a: 1}
+    moveSpeed: 4
+    jumpForce: 12
+    health: 3
+    meleeDamage: 1
+    waitDuration: 0.2
+    detectionRadius: 7
+    patrolPointA: {x: 1, y: 0}
+    patrolPointB: {x: -1, y: 0}
+    Prefab: {fileID: 5736905275195457614, guid: 080430e818e91e94098b4dbe7e898b95, type: 3}
+    chargeSpeed: 7
+    chargeDuration: 0.6
+    chargeCooldown: 0.8
+    hitstunDuration: 1
+  - label: Enemy A 1
+    scale: 1
+    gravity: 3
+    sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
+    color: {r: 1, g: 0.5, b: 0.5, a: 1}
+    moveSpeed: 4
+    jumpForce: 12
+    health: 3
+    meleeDamage: 1
+    waitDuration: 0.6
+    detectionRadius: 7
+    patrolPointA: {x: 2, y: 0}
+    patrolPointB: {x: -2, y: 0}
+    Prefab: {fileID: 5736905275195457614, guid: 080430e818e91e94098b4dbe7e898b95, type: 3}
+    chargeSpeed: 7
+    chargeDuration: 0.6
+    chargeCooldown: 0.8
+    hitstunDuration: 1

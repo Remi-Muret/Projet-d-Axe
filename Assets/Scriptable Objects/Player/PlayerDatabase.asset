@@ -29,11 +29,11 @@ MonoBehaviour:
     invulnerabilityTime: 1
     knockbackX: 10
     knockbackY: 5
-    bombDamage: 3
+    bombDamage: 5
     bombForce: 16
-    bombAngle: 70
+    bombAngle: 60
     bombCooldown: 1
-    meleeDamage: 2
+    meleeDamage: 3
     attackChargeRate: 0.15
     dashSpeed: 40
     minAttackDuration: 0.02

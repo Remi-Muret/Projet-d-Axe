@@ -53,7 +53,7 @@ MonoBehaviour:
     gravity: 0
     sprite: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
-  <Category>k__BackingField: 3
+  <Category>k__BackingField: 4
   _id: 0
   playerExplosionPrefab: {fileID: 0}
   enemyExplosionPrefab: {fileID: 9203718684272407502, guid: 52a846dd78ee3de458c3948a587d51df, type: 3}

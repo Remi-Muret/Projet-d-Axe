@@ -4,7 +4,6 @@ public class ItemController : ObjectController
 {
     [field: SerializeField] public ItemDatabase.Category Category { get; private set; }
     [SerializeField] private int _id;
-
     public int Id => _id;
 
     [SerializeField] private GameObject playerExplosionPrefab;
@@ -12,6 +11,7 @@ public class ItemController : ObjectController
     [SerializeField] private float explosionDuration;
 
     private ItemData _itemData;
+    public ItemData ItemData => _itemData;
 
     protected override void Awake()
     {
@@ -33,6 +33,11 @@ public class ItemController : ObjectController
         _itemData = GameManager.Instance.GetItemData(Category, _id);
 
         base.Init();
+    }
+
+    public void SetId(int id)
+    {
+        _id = id;
     }
 
     void IgnorePlayerCollisions()
