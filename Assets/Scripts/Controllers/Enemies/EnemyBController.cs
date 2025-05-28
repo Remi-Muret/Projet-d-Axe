@@ -26,12 +26,16 @@ public class EnemyBController : EnemyController
 
         if (DetectPlayer() && _canAttack)
             StartCoroutine(Bomb());
-
     }
 
     public void SetId(int id)
     {
         _id = id;
+    }
+
+    public void SetDead(bool dead)
+    {
+        _isDying = dead;
     }
 
     bool DetectPlayer()
@@ -57,6 +61,8 @@ public class EnemyBController : EnemyController
 
     void Patrol()
     {
+        if (_isDying) return;
+
         Vector2 target = _moveToPointA ? _patrolTargetA : _patrolTargetB;
         float distance = Vector2.Distance(transform.position, target);
 
@@ -86,6 +92,8 @@ public class EnemyBController : EnemyController
 
     IEnumerator Bomb()
     {
+        if (_isDying) yield break;
+
         _canAttack = false;
         Instantiate(_bombPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 
@@ -96,11 +104,15 @@ public class EnemyBController : EnemyController
 
     void Move()
     {
+        if (_isDying) return;
+
         _rigidbody2D.linearVelocity = new Vector2(_direction * _enemyBData.moveSpeed, _rigidbody2D.linearVelocity.y);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (_isDying) return;
+
         PlayerData _playerData = GameManager.Instance.GetPlayerData();
         HealthSystem healthSystem = GetComponent<HealthSystem>();
 
@@ -137,7 +149,7 @@ public class EnemyBController : EnemyController
     protected void Animation()
     {
         if (_direction != 0f)
-            _spriteRenderer.flipX = _direction < 0f;
+            _spriteRenderer.flipX = _direction > 0f;
     }
 
     void OnDrawGizmos()

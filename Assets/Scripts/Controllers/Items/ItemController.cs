@@ -42,7 +42,7 @@ public class ItemController : ObjectController
 
     void IgnorePlayerCollisions()
     {
-        string[] ignoredTags = { "Player", "Anchor", "Checkpoint", "Item" };
+        string[] ignoredTags = { "Player", "Player Attack", "Anchor", "Item" };
         Collider2D col = GetComponent<Collider2D>();
 
         foreach (string tag in ignoredTags)
@@ -60,7 +60,7 @@ public class ItemController : ObjectController
 
     void IgnoreEnemyCollisions()
     {
-        string[] ignoredTags = { "Enemy", "Anchor", "Checkpoint", "Item" };
+        string[] ignoredTags = { "Enemy", "Enemy Attack", "Anchor", "Item" };
         Collider2D col = GetComponent<Collider2D>();
 
         foreach (string tag in ignoredTags)

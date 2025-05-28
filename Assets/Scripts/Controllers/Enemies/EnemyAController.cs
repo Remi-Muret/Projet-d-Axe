@@ -41,6 +41,11 @@ public class EnemyAController : EnemyController
         _id = id;
     }
 
+    public void SetDead(bool dead)
+    {
+        _isDying = dead;
+    }
+
     bool CheckGroundCollision() => Physics2D.OverlapBox(_groundChecker.position, _groundCheckerBoxSize, 0f, _groundLayer);
 
     bool DetectPlayer()
@@ -88,7 +93,7 @@ public class EnemyAController : EnemyController
 
     void Patrol()
     {
-        if (_isCharging || _isStunned) return;
+        if (_isCharging || _isStunned || _isDying) return;
 
         if (DetectPlayer()) 
         {
@@ -122,9 +127,11 @@ public class EnemyAController : EnemyController
             }
         }
     }
-    
+
     IEnumerator Charge()
     {
+        if (_isDying) yield break;
+
         _isCharging = true;
         _canAttack = false;
 
@@ -133,14 +140,33 @@ public class EnemyAController : EnemyController
 
         _chargeDirection = _direction > 0f ? 1f : -1f;
 
-        yield return new WaitForSeconds(_enemyAData.chargeDuration);
+        float timer = 0f;
+        while (timer < _enemyAData.chargeDuration)
+        {
+            if (_isDying)
+            {
+                _isCharging = false;
+                yield break;
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
 
         _isCharging = false;
 
         if (_player != null)
             _direction = Mathf.Sign(_player.transform.position.x - transform.position.x);
 
-        yield return new WaitForSeconds(_enemyAData.chargeCooldown);
+        timer = 0f;
+        while (timer < _enemyAData.chargeCooldown)
+        {
+            if (_isDying)
+                yield break;
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
 
         _canAttack = true;
     }
@@ -170,7 +196,7 @@ public class EnemyAController : EnemyController
 
     void Move()
     {
-        if (_isStunned) return;
+        if (_isStunned || _isDying) return;
 
         if (_isCharging)
             _rigidbody2D.linearVelocity = new Vector2(_chargeDirection * _enemyAData.chargeSpeed, _rigidbody2D.linearVelocity.y);
@@ -180,7 +206,7 @@ public class EnemyAController : EnemyController
 
     void Jump()
     {
-        if (_isCharging || _isStunned) return;
+        if (_isCharging || _isStunned || _isDying) return;
 
         Vector2 forwardDirection = new Vector2(_direction, 0f);
         Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y - 1.5f);
@@ -191,6 +217,8 @@ public class EnemyAController : EnemyController
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (_isDying) return;
+
         PlayerData _playerData = GameManager.Instance.GetPlayerData();
         HealthSystem healthSystem = GetComponent<HealthSystem>();
 
@@ -226,6 +254,8 @@ public class EnemyAController : EnemyController
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (_isDying) return;
+
         if (collision.collider.CompareTag("Player"))
             StartCoroutine(Hitstun()); 
     }
@@ -233,7 +263,15 @@ public class EnemyAController : EnemyController
     protected void Animation()
     {
         if (_direction != 0f)
-            _spriteRenderer.flipX = _direction < 0f;
+            _spriteRenderer.flipX = _direction > 0f;
+
+        float horizontalSpeed = Mathf.Abs(_rigidbody2D.linearVelocity.x);
+        _animator.SetFloat("Speed", horizontalSpeed);
+
+        if (_isCharging)
+            _animator.SetBool("IsCharging", true);
+        else
+            _animator.SetBool("IsCharging", false);
     }
 
     void OnDrawGizmos()

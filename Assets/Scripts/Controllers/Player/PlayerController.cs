@@ -24,12 +24,17 @@ public class PlayerController : FigureController
     private float _lastProjectileTime;
 
     private bool _isDirectionLocked;
+    private bool _isJumpSquatting;
     private bool _isJumping;
     private bool _isWallSliding;
     private bool _isWallJumping;
+    private bool _isChargingAttack;
     private bool _isAttacking;
+    private bool _isSettingThrow;
+    private bool _isThrowing;
     private bool _isInvulnerable;
     private bool _isKnockedBack;
+    private bool _isDying;
     private bool _wallSlideCooldown;
     private bool _bombForm;
     private bool _meleeForm;
@@ -81,7 +86,12 @@ public class PlayerController : FigureController
         Animation();
     }
 
-    bool CheckGroundCollision() => Physics2D.OverlapBox(_groundChecker.position, _groundCheckerBoxSize, 0f, _groundLayer);
+    public void SetDead(bool dead)
+    {
+        _isDying = dead;
+    }
+
+    public bool CheckGroundCollision() => Physics2D.OverlapBox(_groundChecker.position, _groundCheckerBoxSize, 0f, _groundLayer);
     
     bool CheckWallCollisionRight() => Physics2D.OverlapBox(_wallCheckerRight.position, _wallCheckerBoxSize, 0f, _groundLayer);
     
@@ -89,15 +99,15 @@ public class PlayerController : FigureController
 
     void HandleInputs()
     {
-        if (_isAttacking) return;
+        if (_isChargingAttack || _isAttacking || _isDying) return;
 
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
 
+        if (Input.GetButton("A") && _bombForm) StartCoroutine(Bomb(_playerData.bombAngle));
         if (Input.GetButtonDown("A") && _meleeForm) StartCoroutine(Attack());
-        if (Input.GetButton("A") && _projectileForm) Projectile();
-        if (Input.GetButton("A") && _bombForm) Bomb(_playerData.bombAngle);
-        if (Input.GetButtonDown("B")) StartCoroutine(Jump());
+        if (Input.GetButton("A") && _projectileForm) StartCoroutine(Projectile());
+        if (Input.GetButtonDown("B")) StartCoroutine(JumpImpulse());
     }
 
     void Move()
@@ -122,44 +132,45 @@ public class PlayerController : FigureController
         _rigidbody2D.linearVelocity = new Vector2(_horizontalInput * _playerData.moveSpeed, _rigidbody2D.linearVelocity.y);
     }
 
-    IEnumerator Jump()
+    IEnumerator JumpImpulse()
     {
         if (CheckGroundCollision())
         {
-            _isWallSliding = false;
-            _isJumping = true;
-            _rigidbody2D.linearVelocity = new Vector2(_rigidbody2D.linearVelocity.x, _playerData.jumpForce);
+            _isDirectionLocked = true;
+            _isJumpSquatting = true;
+            _rigidbody2D.linearVelocity = new Vector2(0f, 0f);
 
-            PlaySound(_jumpSound);
+            yield return new WaitForSeconds(_playerData.jumpSquatDuration);
 
-            yield return new WaitForSeconds(_playerData.jumpDuration);
-
-            _isJumping = false;
+            _isDirectionLocked = false;
+            _isJumpSquatting = false;
+            StartCoroutine(Jump());
         }
-        else if (CheckWallCollisionRight() && _isWallSliding && Input.GetKey(KeyCode.D))
+        if (CheckWallCollisionRight() && _isWallSliding && Input.GetKey(KeyCode.D))
         {
+            _isWallSliding = false;
+            _isWallJumping = true;
             StartCoroutine(WallJump(-_playerData.wallJumpForceX));
         }
         else if (CheckWallCollisionLeft() && _isWallSliding && Input.GetKey(KeyCode.A))
         {
+            _isWallSliding = false;
+            _isWallJumping = true;
             StartCoroutine(WallJump(_playerData.wallJumpForceX));
         }
     }
 
-    IEnumerator WallJump(float forceX)
+    IEnumerator Jump()
     {
         _isWallSliding = false;
-        _isDirectionLocked = true;
-        _isWallJumping = true;
-        _rigidbody2D.gravityScale = _playerData.gravity;
-        _rigidbody2D.linearVelocity = new Vector2(forceX, _playerData.wallJumpForceY);
+        _isJumping = true;
+        _rigidbody2D.linearVelocity = new Vector2(_rigidbody2D.linearVelocity.x, _playerData.jumpForce);
 
-        yield return new WaitForSeconds(0.1f);
+        PlaySound(_jumpSound);
 
-        yield return new WaitUntil(() => CheckGroundCollision() || CheckWallCollisionRight() || CheckWallCollisionLeft());
+        yield return new WaitForSeconds(_playerData.jumpDuration);
 
-        _isDirectionLocked = false;
-        _isWallJumping = false;
+        _isJumping = false;
     }
 
     IEnumerator WallSlide()
@@ -178,13 +189,68 @@ public class PlayerController : FigureController
         _wallSlideCooldown = false;
     }
 
+    IEnumerator WallJump(float forceX)
+    {
+        _isDirectionLocked = true;
+        _rigidbody2D.gravityScale = _playerData.gravity;
+        _rigidbody2D.linearVelocity = new Vector2(forceX, _playerData.wallJumpForceY);
+
+        yield return new WaitForSeconds(0.1f);
+
+        yield return new WaitUntil(() => CheckGroundCollision() || CheckWallCollisionRight() || CheckWallCollisionLeft());
+
+        _isDirectionLocked = false;
+        _isWallJumping = false;
+    }
+
+    IEnumerator Bomb(float angle)
+    {
+        if (_isSettingThrow || Time.time - _lastBombTime < _playerData.bombCooldown || _isKnockedBack || _isDying) yield break;
+
+        _isDirectionLocked = true;
+        _isSettingThrow = true;
+        _isThrowing = true;
+
+        if (CheckGroundCollision())
+            _rigidbody2D.linearVelocity = new Vector2(0f, 0f);
+
+        yield return new WaitForSeconds(0.25f);
+
+        if (CheckGroundCollision())
+            _rigidbody2D.linearVelocity = new Vector2(0f, 0f);
+
+        float offsetX = _spriteRenderer.flipX ? -0.3f : 0.3f;
+
+        _lastBombTime = Time.time;
+
+        GameObject bomb = Instantiate(
+            _bombPrefab,
+            new Vector3(transform.position.x + offsetX, transform.position.y, transform.position.z),
+            Quaternion.Euler(0f, 0f, angle)
+        );
+
+        Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
+
+        if (_spriteRenderer.flipX)
+        {
+            angle = 180f - angle;
+            direction.x *= -1;
+        }
+
+        Rigidbody2D _bombRigidbody2D = bomb.GetComponent<Rigidbody2D>();
+        _bombRigidbody2D.AddForce(direction * _playerData.bombForce, ForceMode2D.Impulse);
+        _isDirectionLocked = false;
+        _isSettingThrow = false;
+        _isThrowing = false;
+    }
+
     IEnumerator Attack()
     {
-        if (!_isAttacking)
+        if (!_isChargingAttack && !_isAttacking)
         {
             _isWallSliding = false;
             _isDirectionLocked = true;
-            _isAttacking = true;
+            _isChargingAttack = true;
             _rigidbody2D.gravityScale = 0f;
             _rigidbody2D.linearVelocity = new Vector2(0f, -0.5f);
 
@@ -200,7 +266,7 @@ public class PlayerController : FigureController
 
                 if (_isKnockedBack)
                 {
-                    _isAttacking = false;
+                    _isChargingAttack = false;
                     _rigidbody2D.gravityScale = _playerData.gravity;
                     yield break;
                 }
@@ -208,7 +274,9 @@ public class PlayerController : FigureController
             }
 
             float adjustedAttackDuration = _playerData.minAttackDuration + holdTime;
-        
+
+            _isChargingAttack = false;
+            _isAttacking = true;
             _isInvulnerable = true;
             if (_hitboxRight != null && _hitboxLeft != null)
             {
@@ -243,21 +311,33 @@ public class PlayerController : FigureController
         }
     }
 
-    void Projectile()
+    IEnumerator Projectile()
     {
-        float offsetX = 0f;
-        if (_spriteRenderer.flipX)
-            offsetX = -0.3f;
-        else
-            offsetX = 0.3f;
+        if (_isSettingThrow || Time.time - _lastProjectileTime < _playerData.projectileCooldown || _isKnockedBack || _isDying) yield break;
 
-        if (Time.time - _lastProjectileTime < _playerData.projectileCooldown) return;
+        _isDirectionLocked = true;
+        _isSettingThrow = true;
+        _isThrowing = true;
+
+        if (CheckGroundCollision())
+            _rigidbody2D.linearVelocity = new Vector2(0f, 0f);
+
+        yield return new WaitForSeconds(0.25f);
+
+        if (CheckGroundCollision())
+            _rigidbody2D.linearVelocity = new Vector2(0f, 0f);
+
+        float offsetX = _spriteRenderer.flipX ? -0.3f : 0.3f;
 
         _lastProjectileTime = Time.time;
 
-        GameObject projectile = Instantiate(_projectilePrefab, new Vector3(transform.position.x + offsetX, transform.position.y, transform.position.z), Quaternion.identity);
+        GameObject projectile = Instantiate(
+            _projectilePrefab,
+            new Vector3(transform.position.x + offsetX, transform.position.y, transform.position.z),
+            Quaternion.identity
+        );
+
         Vector2 direction = Vector2.right;
-        Rigidbody2D _rigidbody2D = projectile.GetComponent<Rigidbody2D>();
         SpriteRenderer sprite = projectile.GetComponent<SpriteRenderer>();
         if (_spriteRenderer.flipX)
         {
@@ -265,31 +345,11 @@ public class PlayerController : FigureController
             sprite.flipX = true;
         }
 
-        _rigidbody2D.linearVelocity = direction * _playerData.projectileForce;
-    }
-
-    void Bomb(float angle)
-    {
-        float offsetX = 0f;
-        if (_spriteRenderer.flipX)
-            offsetX = -0.3f;
-        else
-            offsetX = 0.3f;
-
-        if (Time.time - _lastBombTime < _playerData.bombCooldown) return;
-
-        _lastBombTime = Time.time;
-
-        GameObject bomb = Instantiate(_bombPrefab, new Vector3(transform.position.x + offsetX, transform.position.y, transform.position.z), Quaternion.Euler(0f, 0f, angle));
-        Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
-        Rigidbody2D _rigidbody2D = bomb.GetComponent<Rigidbody2D>();
-        if (_spriteRenderer.flipX)
-        {
-            angle = 180f - angle;
-            direction.x *= -1;
-        }
-
-        _rigidbody2D.AddForce(direction * _playerData.bombForce, ForceMode2D.Impulse);
+        Rigidbody2D _projectileRigidbody2D = projectile.GetComponent<Rigidbody2D>();
+        _projectileRigidbody2D.linearVelocity = direction * _playerData.projectileForce;
+        _isDirectionLocked = false;
+        _isSettingThrow = false;
+        _isThrowing = false;
     }
 
     IEnumerator ApplyKnockback()
@@ -421,6 +481,7 @@ public class PlayerController : FigureController
                 }
 
                 healthSystem.TakeDamage(damage);
+                StartCoroutine(ApplyKnockback());
             }
         }
     }
@@ -456,19 +517,63 @@ public class PlayerController : FigureController
 
     void Animation()
     {
+        if (!_isWallJumping && _horizontalInput != 0f)
+            _spriteRenderer.flipX = _horizontalInput < 0f;
+        else if (_isWallJumping)
+            _spriteRenderer.flipX = _rigidbody2D.linearVelocity.x < 0f;
+
+        if (CheckGroundCollision())
+        {
+            float horizontalSpeed = Mathf.Abs(_rigidbody2D.linearVelocity.x);
+            _animator.SetFloat("Speed", horizontalSpeed);
+        }
+
+        if (_isJumpSquatting)
+            _animator.SetBool("IsJumpSquatting", true);
+        else
+            _animator.SetBool("IsJumpSquatting", false);
+
+        if (!CheckGroundCollision() && !_isWallSliding)
+            _animator.SetBool("IsInAir", true);
+        else
+            _animator.SetBool("IsInAir", false);
+
         if (CheckWallCollisionRight() && !CheckGroundCollision() && !_isJumping)
         {
-            _spriteRenderer.flipX = true;
+            _animator.SetBool("IsWallSliding", true);
+            _spriteRenderer.flipX = false;
             return;
         }
         else if (CheckWallCollisionLeft() && !CheckGroundCollision() && !_isJumping)
         {
-            _spriteRenderer.flipX = false;
+            _animator.SetBool("IsWallSliding", true);
+            _spriteRenderer.flipX = true;
             return;
         }
+        else
+        {
+            _animator.SetBool("IsWallSliding", false);
+        }
 
-        if (!_isWallJumping && _horizontalInput != 0f)
-            _spriteRenderer.flipX = _horizontalInput < 0f;
+        if (_isChargingAttack)
+            _animator.SetBool("IsChargingAttack", true);
+        else
+            _animator.SetBool("IsChargingAttack", false);
+
+        if (_isAttacking)
+            _animator.SetBool("IsAttacking", true);
+        else
+            _animator.SetBool("IsAttacking", false);
+
+        if (_isThrowing)
+            _animator.SetBool("IsThrowing", true);
+        else
+            _animator.SetBool("IsThrowing", false);
+
+        if (_isKnockedBack && !_isDying)
+            _animator.SetBool("IsKnockedBack", true);
+        else
+            _animator.SetBool("IsKnockedBack", false);
     }
 
     IEnumerator Colorize(Color flashColor, float duration)

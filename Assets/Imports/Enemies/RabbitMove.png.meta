@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 7935ebd0e42024846a48d409b9250a0c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3878894740945990157
+    second: MoveLapin_0
+  - first:
+      213: 8235354436077093178
+    second: MoveLapin_1
+  - first:
+      213: 6873220956778276840
+    second: MoveLapin_2
+  - first:
+      213: 3898149511225355614
+    second: MoveLapin_3
+  - first:
+      213: -3420382428189318457
+    second: MoveLapin_4
+  - first:
+      213: -894149268417989229
+    second: MoveLapin_5
+  - first:
+      213: 1379689140492902228
+    second: MoveLapin_6
+  - first:
+      213: -1193841988989733482
+    second: MoveLapin_7
+  - first:
+      213: 377115171826521507
+    second: MoveLapin_8
+  - first:
+      213: 2752630318063404849
+    second: MoveLapin_9
+  - first:
+      213: 188306546345294174
+    second: MoveLapin_10
+  - first:
+      213: 4071666304526225670
+    second: MoveLapin_11
+  - first:
+      213: 6343130760645344632
+    second: MoveLapin_12
+  - first:
+      213: 1770697198531984171
+    second: MoveLapin_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 180
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RabbitMove_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65b53af3bd40e640b52005992d1ede6
+      internalID: -2143732290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_1
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78ea8750200dbd04b8ade727970efd46
+      internalID: -2023604401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_2
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 717a94cdc2240ca4da81b16bb1953a21
+      internalID: 638142309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_3
+      rect:
+        serializedVersion: 2
+        x: 1941
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 169572048e220d043ba6611a09d30a52
+      internalID: -2048933414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_4
+      rect:
+        serializedVersion: 2
+        x: 2588
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b92f5e5c2a7b6c146bd376feb75857e0
+      internalID: 1154059224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_5
+      rect:
+        serializedVersion: 2
+        x: 3235
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74fa541387307f147be51dffc1ec0854
+      internalID: -1984066196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_6
+      rect:
+        serializedVersion: 2
+        x: 3882
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3367116729e15714b90077257e2f1a73
+      internalID: -1380621835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_7
+      rect:
+        serializedVersion: 2
+        x: 4529
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a7e7560cea52a04fb9a241582a4e415
+      internalID: -2026674619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73de61b4e94e44a48916a902f0ad9ed8
+      internalID: -881153350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_9
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 278df911430a0994695499514edbc048
+      internalID: -2113835948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_10
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa5b52f27b3f0cd4bba0249d1561880e
+      internalID: -57900126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_11
+      rect:
+        serializedVersion: 2
+        x: 1941
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ac4347735b531d46a0d72f83245991a
+      internalID: 434773108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_12
+      rect:
+        serializedVersion: 2
+        x: 2588
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d18d9e4afbaadf42a953f50f07ecbfc
+      internalID: -947238139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitMove_13
+      rect:
+        serializedVersion: 2
+        x: 3235
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aa1a0bef2a783244b3a3822414aae83
+      internalID: -724318859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: afae89e95615ff24cae6bbe50c0843e5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      RabbitMove_0: -2143732290
+      RabbitMove_1: -2023604401
+      RabbitMove_10: -57900126
+      RabbitMove_11: 434773108
+      RabbitMove_12: -947238139
+      RabbitMove_13: -724318859
+      RabbitMove_2: 638142309
+      RabbitMove_3: -2048933414
+      RabbitMove_4: 1154059224
+      RabbitMove_5: -1984066196
+      RabbitMove_6: -1380621835
+      RabbitMove_7: -2026674619
+      RabbitMove_8: -881153350
+      RabbitMove_9: -2113835948
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

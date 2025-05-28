@@ -1,0 +1,503 @@
+fileFormatVersion: 2
+guid: 6ea201223a012644f8228beaeda817ca
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2808665297301600820
+    second: DeathLapin_0
+  - first:
+      213: 8596567187464435370
+    second: DeathLapin_1
+  - first:
+      213: -2854816664760363913
+    second: DeathLapin_2
+  - first:
+      213: 261269969502009363
+    second: DeathLapin_3
+  - first:
+      213: -146399704416830873
+    second: DeathLapin_4
+  - first:
+      213: -2801620354239289566
+    second: DeathLapin_5
+  - first:
+      213: -1719958204188572572
+    second: DeathLapin_6
+  - first:
+      213: 6079700296495197401
+    second: DeathLapin_7
+  - first:
+      213: -7955092022449254866
+    second: DeathLapin_8
+  - first:
+      213: -8486603659691836598
+    second: DeathLapin_9
+  - first:
+      213: -3608501495306914803
+    second: DeathLapin_10
+  - first:
+      213: -8568632189622627152
+    second: DeathLapin_11
+  - first:
+      213: -5593514376510371220
+    second: DeathLapin_12
+  - first:
+      213: -4194090199613592884
+    second: DeathLapin_13
+  - first:
+      213: -4562183453373270046
+    second: DeathLapin_14
+  - first:
+      213: 7614650888930585911
+    second: DeathLapin_15
+  - first:
+      213: -695632673764810899
+    second: DeathLapin_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RabbitDeath_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eef2dc01316a2884992e0fbb52ccfb97
+      internalID: 552981341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_1
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f896af5a627ba64caec257d65e6f78a
+      internalID: 1563862221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_2
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d424c6b599256547b5aaf09f88ff7b1
+      internalID: 1462046172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_3
+      rect:
+        serializedVersion: 2
+        x: 1941
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f45ca2be4348b314fa8d2154500dd0ed
+      internalID: -1984583407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_4
+      rect:
+        serializedVersion: 2
+        x: 2588
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8367d2ac4bf8c39449d2d081decd4d50
+      internalID: 1088719397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_5
+      rect:
+        serializedVersion: 2
+        x: 3235
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b60ee9a328c25547bc1113594f10553
+      internalID: -1365553631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_6
+      rect:
+        serializedVersion: 2
+        x: 3882
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 723af494a2e88314eb19c69d04d17584
+      internalID: -432530425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_7
+      rect:
+        serializedVersion: 2
+        x: 4529
+        y: 4529
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaed19a075de4084cb2d91a58c4f77ea
+      internalID: 1004235445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6bffd4ab2b504c4186fd5f56aa32211
+      internalID: 919602135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_9
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d494c35a6c915046939d83a16c8094d
+      internalID: 1568785086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_10
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f38bd27d570f8ea489292a9be5354927
+      internalID: -1592604224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_11
+      rect:
+        serializedVersion: 2
+        x: 1941
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f4aebf56a6c874a99665e86529811d
+      internalID: 1852989501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_12
+      rect:
+        serializedVersion: 2
+        x: 2588
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6be44b4ab2e385642a8736d55f96f5c9
+      internalID: -1668584222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RabbitDeath_13
+      rect:
+        serializedVersion: 2
+        x: 3235
+        y: 3882
+        width: 647
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d7fb5d59bf9df444b955848240152d1
+      internalID: -2042117339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 0251973bf10d5f24487c02f17fe7df8a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      RabbitDeath_0: 552981341
+      RabbitDeath_1: 1563862221
+      RabbitDeath_10: -1592604224
+      RabbitDeath_11: 1852989501
+      RabbitDeath_12: -1668584222
+      RabbitDeath_13: -2042117339
+      RabbitDeath_2: 1462046172
+      RabbitDeath_3: -1984583407
+      RabbitDeath_4: 1088719397
+      RabbitDeath_5: -1365553631
+      RabbitDeath_6: -432530425
+      RabbitDeath_7: 1004235445
+      RabbitDeath_8: 919602135
+      RabbitDeath_9: 1568785086
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

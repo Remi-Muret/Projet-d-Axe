@@ -55,6 +55,9 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 0, a: 0}
   <Category>k__BackingField: 3
   _id: 1
+  playerExplosionPrefab: {fileID: 0}
+  enemyExplosionPrefab: {fileID: 0}
+  explosionDuration: 0
 --- !u!212 &1725294298730382461
 SpriteRenderer:
   m_ObjectHideFlags: 0

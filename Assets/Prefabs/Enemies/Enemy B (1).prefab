@@ -82,7 +82,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterType: 2
-  vfxPrefab: {fileID: 0}
+  killVFXPrefab: {fileID: 3737167253457880917, guid: 8a02e09556a3ef8459682aa7f7cd1e8a, type: 3}
+  healthUI: {fileID: 0}
+  _currentHealth: 0
+  _maxHealth: 0
 --- !u!212 &1336740436981185737
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -127,12 +130,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
+  m_Sprite: {fileID: 1238414988, guid: 692da8d43018895438aff83f47308619, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.1566665, y: 2.1566665}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -172,17 +175,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.375}
+  m_Offset: {x: -0.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8, y: 4}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 2.1566665, y: 2.1566665}
+    newSize: {x: 2.1566665, y: 2.1566665}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 2.25}
+  m_Size: {x: 1.25, y: 1.25}
   m_EdgeRadius: 0
 --- !u!50 &6231528606106757106
 Rigidbody2D:
@@ -192,7 +195,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4229857568404688776}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -221,7 +224,7 @@ Animator:
   m_GameObject: {fileID: 4229857568404688776}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 57f7aea129de7b641889dbbb6abb30a4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -16,12 +16,12 @@ MonoBehaviour:
   - label: Enemy B 1
     scale: 1
     gravity: 0
-    sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
-    color: {r: 0.5019608, g: 0.5019608, b: 1, a: 1}
+    sprite: {fileID: 1238414988, guid: 692da8d43018895438aff83f47308619, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
     moveSpeed: 2
     jumpForce: 0
     health: 5
-    meleeDamage: 1
+    meleeDamage: 2
     waitDuration: 0.6
     detectionRadius: 5
     patrolPointA: {x: 1, y: 0}
@@ -33,12 +33,12 @@ MonoBehaviour:
   - label: Enemy B 2
     scale: 1
     gravity: 0
-    sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
-    color: {r: 0.5019608, g: 0.5019608, b: 1, a: 1}
+    sprite: {fileID: 1238414988, guid: 692da8d43018895438aff83f47308619, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
     moveSpeed: 5
     jumpForce: 0
     health: 5
-    meleeDamage: 1
+    meleeDamage: 2
     waitDuration: 0.6
     detectionRadius: 5
     patrolPointA: {x: 3, y: 0}

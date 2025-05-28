@@ -24,6 +24,7 @@ public class EnemyController : FigureController
     protected bool _canAttack;
     protected bool _moveToPointA;
     protected bool _isPaused;
+    protected bool _isDying;
 
     protected override void Init()
     {

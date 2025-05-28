@@ -35,8 +35,8 @@ public class TimeSystem : MonoBehaviour
         int currentSecond = Mathf.CeilToInt(_remainingTime);
         if (currentSecond != _lastPrintedSecond)
         {
-            Debug.Log("Temps restant : " + currentSecond + "s");
             _lastPrintedSecond = currentSecond;
+            Debug.Log($"Temps restant : {currentSecond} secondes");
         }
 
         if (_remainingTime <= 0f)

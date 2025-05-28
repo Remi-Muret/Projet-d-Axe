@@ -7,8 +7,8 @@ public class ItemDatabase : ScriptableObject
     public enum Category
     {
         Power,
-        Coin,
         Life,
+        Checkpoint,
         PlayerAttack,
         EnemyAttack,
     }

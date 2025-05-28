@@ -16,10 +16,11 @@ MonoBehaviour:
     label: Player
     scale: 1
     gravity: 3
-    sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
+    sprite: {fileID: 617549362, guid: 485d596e27424aa42bb6317e297a0d12, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
     moveSpeed: 10
     jumpForce: 15
+    jumpSquatDuration: 0.1
     jumpDuration: 0.4
     wallSlideGravity: 2
     wallJumpForceX: 10
@@ -30,9 +31,9 @@ MonoBehaviour:
     knockbackX: 10
     knockbackY: 5
     bombDamage: 5
-    bombForce: 16
-    bombAngle: 60
-    bombCooldown: 1
+    bombForce: 18
+    bombAngle: 55
+    bombCooldown: 0.5
     meleeDamage: 3
     attackChargeRate: 0.15
     dashSpeed: 40
@@ -40,4 +41,4 @@ MonoBehaviour:
     maxAttackDuration: 0.2
     projectileDamage: 1
     projectileForce: 20
-    projectileCooldown: 0.3
+    projectileCooldown: 0.1

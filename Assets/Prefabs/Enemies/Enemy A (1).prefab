@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4782485568016540669}
   - component: {fileID: -7139978344339196287}
   - component: {fileID: 5427009412977123354}
-  - component: {fileID: 1595456978400125472}
+  - component: {fileID: 5597736065291253702}
   - component: {fileID: 8937528684845823575}
   - component: {fileID: 7608742874870015076}
   - component: {fileID: -3626161089133610676}
@@ -114,7 +114,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterType: 1
-  vfxPrefab: {fileID: 0}
+  killVFXPrefab: {fileID: 3737167253457880917, guid: 8a02e09556a3ef8459682aa7f7cd1e8a, type: 3}
+  healthUI: {fileID: 0}
+  _currentHealth: 0
+  _maxHealth: 0
 --- !u!212 &5427009412977123354
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -159,7 +162,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1319608873667565512, guid: d6f80832628c3ad41a0c4028791778b7, type: 3}
+  m_Sprite: {fileID: -947238139, guid: 7935ebd0e42024846a48d409b9250a0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -170,7 +173,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1595456978400125472
+--- !u!61 &5597736065291253702
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,13 +211,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8, y: 4}
+    oldSize: {x: 3.2350001, y: 3.2350001}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 2.25}
+  m_Size: {x: 2, y: 2.25}
   m_EdgeRadius: 0
 --- !u!50 &8937528684845823575
 Rigidbody2D:
@@ -253,7 +256,7 @@ Animator:
   m_GameObject: {fileID: 5736905275195457614}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c4e7183d189e2b4ba1bf8d78ff0389f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     private CheckpointData _currentCheckpoint;
     private TimeSystem _currentTime;
+    private Transform _enemiesParent;
+    private Transform _itemsParent;
 
     private List<SpawnInfo> _spawnData = new();
 
@@ -40,6 +42,14 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        _enemiesParent = GameObject.Find("- Enemies -")?.transform;
+        if (_enemiesParent == null)
+            _enemiesParent = new GameObject("- Enemies -").transform;
+
+        _itemsParent = GameObject.Find("- Items -")?.transform;
+        if (_itemsParent == null)
+            _itemsParent = new GameObject("- Items -").transform;
     }
 
     void Start()
@@ -69,14 +79,23 @@ public class GameManager : MonoBehaviour
 
         RespawnObjects();
         TimeSystem.Instance.ResetTimer();
-        Instantiate(_playerPrefab, position, Quaternion.identity);
+
+        GameObject player = Instantiate(_playerPrefab, position, Quaternion.identity);
+
+        HealthSystem healthSystem = player.GetComponent<HealthSystem>();
+        HealthSystem.SetInstance(healthSystem);
+
+        healthSystem.healthUI = FindFirstObjectByType<HealthUI>();
+        healthSystem.InitHealth();
+
+        FindFirstObjectByType<MainUIController>().SetPlayerHealthSystem(healthSystem);
     }
 
     void RegisterObjects()
     {
         _spawnData.Clear();
 
-        foreach (var enemyA in FindObjectsOfType<EnemyAController>())
+        foreach (var enemyA in FindObjectsByType<EnemyAController>(FindObjectsSortMode.None))
         {
             _spawnData.Add(new SpawnInfo
             {
@@ -86,7 +105,7 @@ public class GameManager : MonoBehaviour
             });
         }
 
-        foreach (var enemyB in FindObjectsOfType<EnemyBController>())
+        foreach (var enemyB in FindObjectsByType<EnemyBController>(FindObjectsSortMode.None))
         {
             _spawnData.Add(new SpawnInfo
             {
@@ -96,7 +115,7 @@ public class GameManager : MonoBehaviour
             });
         }
 
-        foreach (var item in FindObjectsOfType<ItemController>())
+        foreach (var item in FindObjectsByType<ItemController>(FindObjectsSortMode.None))
         {
             _spawnData.Add(new SpawnInfo
             {
@@ -110,13 +129,13 @@ public class GameManager : MonoBehaviour
 
     void RespawnObjects()
     {
-        foreach (var enemyA in FindObjectsOfType<EnemyAController>())
+        foreach (var enemyA in FindObjectsByType<EnemyAController>(FindObjectsSortMode.None))
             Destroy(enemyA.gameObject);
 
-        foreach (var enemyB in FindObjectsOfType<EnemyBController>())
+        foreach (var enemyB in FindObjectsByType<EnemyBController>(FindObjectsSortMode.None))
             Destroy(enemyB.gameObject);
 
-        foreach (var item in FindObjectsOfType<ItemController>())
+        foreach (var item in FindObjectsByType<ItemController>(FindObjectsSortMode.None))
             Destroy(item.gameObject);
 
         foreach (var info in _spawnData)
@@ -128,21 +147,21 @@ public class GameManager : MonoBehaviour
             {
                 case SpawnInfo.Object.EnemyA:
                     prefab = _enemyADatabase.GetData(info.Id).Prefab;
-                    instance = Instantiate(prefab, info.Position, Quaternion.identity);
+                    instance = Instantiate(prefab, info.Position, Quaternion.identity, _enemiesParent);
                     var controllerA = instance.GetComponent<EnemyAController>();
                     if (controllerA != null)
                         controllerA.SetId(info.Id);
                     break;
                 case SpawnInfo.Object.EnemyB:
                     prefab = _enemyBDatabase.GetData(info.Id).Prefab;
-                    instance = Instantiate(prefab, info.Position, Quaternion.identity);
+                    instance = Instantiate(prefab, info.Position, Quaternion.identity, _enemiesParent);
                     var controllerB = instance.GetComponent<EnemyBController>();
                     if (controllerB != null)
                         controllerB.SetId(info.Id);
                     break;
                 case SpawnInfo.Object.Item:
                     prefab = _itemDatabase.GetData(info.Category, info.Id).Prefab;
-                    instance = Instantiate(prefab, info.Position, Quaternion.identity);
+                    instance = Instantiate(prefab, info.Position, Quaternion.identity, _itemsParent);
                     var itemController = instance.GetComponent<ItemController>();
                     if (itemController != null)
                         itemController.SetId(info.Id);
