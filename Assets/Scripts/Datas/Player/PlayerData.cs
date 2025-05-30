@@ -7,7 +7,6 @@ public class PlayerData : ObjectData
     [Header("Movement")]
     public float moveSpeed;
     public float jumpForce;
-    public float jumpSquatDuration;
     public float jumpDuration;
     public float wallSlideGravity;
     public float wallJumpForceX;

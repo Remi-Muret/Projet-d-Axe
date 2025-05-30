@@ -278,6 +278,18 @@ PrefabInstance:
       propertyPath: _healthSystem
       value: 
       objectReference: {fileID: 973019194}
+    - target: {fileID: 3163550404744651098, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375307699709837352, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874411363464230820, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5312919358001431636, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -297,6 +309,14 @@ PrefabInstance:
     - target: {fileID: 5435233619125198289, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917152392482651247, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031696306896827642, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7514937864241477435, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
       propertyPath: m_Pivot.x
@@ -378,6 +398,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7798394042798451884, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8067618116202720086, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -388,6 +412,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9063063833782834408, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9126238997658156710, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9126238997658156710, guid: fa4e9a9298305cf46b3604b0ac2580b5, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -447,6 +479,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7446582029916756975, guid: ea871b619b25c7944b9c0ed58d533ccb, type: 3}
+      propertyPath: uiController
+      value: 
+      objectReference: {fileID: 876337715}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

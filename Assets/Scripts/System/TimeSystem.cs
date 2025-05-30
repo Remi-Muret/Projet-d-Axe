@@ -8,8 +8,10 @@ public class TimeSystem : MonoBehaviour
     [SerializeField] private float _timer;
     [SerializeField] private bool _deactivateTimer;
 
+    private float _globalTimer;
     private float _remainingTime;
-    private int _lastPrintedSecond = -1;
+    private int _lastPrintedSecond;
+    private bool _isRunning;
 
     void Awake()
     {
@@ -28,8 +30,14 @@ public class TimeSystem : MonoBehaviour
 
     void Update()
     {
-        if (_deactivateTimer) return;
+        if (Input.GetKeyDown(KeyCode.M)) // à retirer
+            ResetAllPlayerPrefs();
+        if (Input.GetKeyDown(KeyCode.P)) // à retirer
+            DebugAllPlayerPrefs();
 
+        if (_deactivateTimer || !_isRunning) return;
+
+        _globalTimer += Time.deltaTime;
         _remainingTime -= Time.deltaTime;
 
         int currentSecond = Mathf.CeilToInt(_remainingTime);
@@ -53,6 +61,20 @@ public class TimeSystem : MonoBehaviour
         }
     }
 
+    public void StartTimer()
+    {
+        _isRunning = true;
+        _globalTimer = 0f;
+        _remainingTime = _timer;
+        _lastPrintedSecond = -1;
+    }
+
+    public void StopTimer()
+    {
+        _isRunning = false;
+    }
+
+
     public void ResetTimer()
     {
         _remainingTime = _timer;
@@ -61,9 +83,27 @@ public class TimeSystem : MonoBehaviour
 
     public void AddTime(float timeToAdd)
     {
-        if (_deactivateTimer) return;
-
         _remainingTime += timeToAdd;
         _remainingTime = Mathf.Min(_remainingTime, _timer);
+    }
+
+    public float GetGlobalTimer()
+    {
+        return _globalTimer;
+    }
+
+    void ResetAllPlayerPrefs() // à retirer
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        Debug.Log("Player prefs deleted");
+    }
+
+    void DebugAllPlayerPrefs() // à retirer
+    {
+        Debug.Log("Easy : " + PlayerPrefs.GetFloat("BestTime_Easy", 0f));
+        Debug.Log("Normal : " + PlayerPrefs.GetFloat("BestTime_Normal", 0f));
+        Debug.Log("Hard : " + PlayerPrefs.GetFloat("BestTime_Hard", 0f));
     }
 }
