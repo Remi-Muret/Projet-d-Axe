@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MainUIController : MonoBehaviour
 {
     [SerializeField] private Transform[] uiCanvasii;
     [SerializeField] private TMP_Text victoryTimeText;
-    [SerializeField] private TMP_Text bestTimeText;
     [SerializeField] private HealthSystem _healthSystem;
 
     private float duration = 0.5f;
@@ -19,11 +19,28 @@ public class MainUIController : MonoBehaviour
 
     void Start()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        HealthSystem healthSystem = player.GetComponent<HealthSystem>();
+        HealthSystem.SetInstance(healthSystem);
+
+        healthSystem.healthUI = FindFirstObjectByType<HealthUI>();
+        healthSystem.InitHealth();
+
+        SetPlayerHealthSystem(healthSystem);
         ActivateMainMenu();
     }
 
     void Update()
     {
+        if (Input.GetButtonDown("Select"))
+        {
+            if (isPaused)
+                DeactivatePauseMenu();
+            else
+                ActivatePauseMenu();
+        }
+
         if (isAnimating)
         {
             time += Time.unscaledDeltaTime;
@@ -34,17 +51,18 @@ public class MainUIController : MonoBehaviour
             if (ratio >= 1f)
                 isAnimating = false;
         }
-
-        if (Input.GetButtonDown("Select"))
-        {
-            if (isPaused)
-                DeactivatePauseMenu();
-            else
-                ActivatePauseMenu();
-        }
     }
 
     float EaseInOutQuart(float x) => x < 0.5f ? 8f * x * x * x * x : 1f - Mathf.Pow(-2f * x + 2f, 4f) / 2f;
+
+    string FormatTime(float time)
+    {
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60f);
+        int milliseconds = Mathf.FloorToInt((time * 1000f) % 1000f);
+
+        return string.Format("{0:00}:{1:00}.{2:000}", minutes, seconds, milliseconds);
+    }
 
     void ActivateMainMenu()
     {
@@ -162,17 +180,18 @@ public class MainUIController : MonoBehaviour
         uiCanvasii[4].gameObject.SetActive(true);
     }
 
-    public void DeactivateVictoryScreen()
+    public void ReloadCurrentScene()
     {
-        uiCanvasii[4].gameObject.SetActive(false);
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 
-    string FormatTime(float time)
+    public void QuitGame()
     {
-        int minutes = Mathf.FloorToInt(time / 60f);
-        int seconds = Mathf.FloorToInt(time % 60f);
-        int milliseconds = Mathf.FloorToInt((time * 1000f) % 1000f);
-
-        return string.Format("{0:00}:{1:00}.{2:000}", minutes, seconds, milliseconds);
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

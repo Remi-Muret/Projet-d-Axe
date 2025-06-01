@@ -139,9 +139,9 @@ MonoBehaviour:
     m_Bits: 8
   _bombPrefab: {fileID: 4194121891865127377, guid: 65984b275337e494596a1c97e31a2a90, type: 3}
   _projectilePrefab: {fileID: 3523927582432450187, guid: 354659a26103d7d4e960883d5e1faf71, type: 3}
-  _jumpSound: {fileID: 0}
-  _attackSound: {fileID: 0}
-  _hitSound: {fileID: 0}
+  _jumpSound: {fileID: 8300000, guid: 6eb68bc02bcaa3548853a1e88de1ca68, type: 3}
+  _attackSound: {fileID: 8300000, guid: 591003e24828cfe4d915114291502a15, type: 3}
+  _splashSound: {fileID: 8300000, guid: 1f06d0a2ac3ccf547a1d6b72dbce6e9e, type: 3}
   _wallCheckerRight: {fileID: 8092280689497948250}
   _wallCheckerLeft: {fileID: 7548577197843981728}
   _hitboxRight: {fileID: 5932399971858059318}
@@ -163,6 +163,8 @@ MonoBehaviour:
   healthUI: {fileID: 0}
   _currentHealth: 0
   _maxHealth: 0
+  _hitSound: {fileID: 8300000, guid: 9558a84d4432eef43b52a0a36cf01837, type: 3}
+  _deathSound: {fileID: 8300000, guid: 08cdeb4ea5e8438418b39eb77366d93a, type: 3}
 --- !u!114 &-8143854770012302734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +338,7 @@ AudioSource:
   m_GameObject: {fileID: 2082363596615786544}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7019320582610157273, guid: 33ecd013cecd07c4b95665a8fd748249, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1

@@ -30,11 +30,6 @@ public class TimeSystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M)) // à retirer
-            ResetAllPlayerPrefs();
-        if (Input.GetKeyDown(KeyCode.P)) // à retirer
-            DebugAllPlayerPrefs();
-
         if (_deactivateTimer || !_isRunning) return;
 
         _globalTimer += Time.deltaTime;
@@ -92,18 +87,13 @@ public class TimeSystem : MonoBehaviour
         return _globalTimer;
     }
 
-    void ResetAllPlayerPrefs() // à retirer
+    public float GetRemainingTime()
     {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
-
-        Debug.Log("Player prefs deleted");
+        return _remainingTime;
     }
 
-    void DebugAllPlayerPrefs() // à retirer
+    public float GetMaxTime()
     {
-        Debug.Log("Easy : " + PlayerPrefs.GetFloat("BestTime_Easy", 0f));
-        Debug.Log("Normal : " + PlayerPrefs.GetFloat("BestTime_Normal", 0f));
-        Debug.Log("Hard : " + PlayerPrefs.GetFloat("BestTime_Hard", 0f));
+        return _timer;
     }
 }

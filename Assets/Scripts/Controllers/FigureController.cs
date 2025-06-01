@@ -17,7 +17,7 @@ public class FigureController : ObjectController
     [Header("Audio")]
     [SerializeField] protected AudioClip _jumpSound;
     [SerializeField] protected AudioClip _attackSound;
-    [SerializeField] protected AudioClip _hitSound;
+    [SerializeField] protected AudioClip _splashSound;
 
     protected Vector2 _groundCheckerBoxSize = new Vector2(0.98f, 0f);
 

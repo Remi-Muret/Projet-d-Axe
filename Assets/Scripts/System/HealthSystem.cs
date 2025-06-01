@@ -19,10 +19,15 @@ public class HealthSystem : MonoBehaviour
     public int _currentHealth;
     public int _maxHealth;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip _hitSound;
+    [SerializeField] private AudioClip _deathSound;
+
     private float _respawnDelay;
     private Vector2 _spawnPosition;
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
+    private AudioSource _audioSource;
 
     public static void SetInstance(HealthSystem instance)
     {
@@ -37,6 +42,7 @@ public class HealthSystem : MonoBehaviour
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
 
         switch (characterType)
         {
@@ -157,7 +163,10 @@ public class HealthSystem : MonoBehaviour
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
             rb.gravityScale = 3f;
+        }
 
         Animator animator = GetComponent<Animator>();
         if (rb != null && animator != null)
@@ -186,7 +195,15 @@ public class HealthSystem : MonoBehaviour
         _currentHealth -= damage;
         StartCoroutine(FlashRed());
 
-        if (_currentHealth <= 0) Die();
+        if (_currentHealth <= 0)
+        {
+            PlaySound(_deathSound);
+            Die();
+        }
+        else
+        {
+            PlaySound(_hitSound);
+        }
 
         if (healthUI != null)
             healthUI.UpdateHealth(true, previousHealth, _currentHealth);
@@ -217,5 +234,11 @@ public class HealthSystem : MonoBehaviour
             healthUI.SetHealthPoint(_currentHealth);
             healthUI.UpdateHealth(false, _maxHealth, _currentHealth);
         }
+    }
+
+    void PlaySound(AudioClip clip)
+    {
+        if (_audioSource != null && clip != null)
+            _audioSource.PlayOneShot(clip);
     }
 }

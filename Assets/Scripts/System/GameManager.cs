@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         public Object objectType;
         public ItemDatabase.Category Category;
         public int Id;
+        public int CheckpointId;
         public Vector2 Position;
     }
 
@@ -117,17 +118,19 @@ public class GameManager : MonoBehaviour
 
         foreach (var item in FindObjectsByType<ItemController>(FindObjectsSortMode.None))
         {
+            var checkpoint = item.GetComponent<CheckpointTrigger>();
             _spawnData.Add(new SpawnInfo
             {
                 objectType = SpawnInfo.Object.Item,
                 Id = item.Id,
                 Category = item.Category,
-                Position = item.transform.position
+                Position = item.transform.position,
+                CheckpointId = checkpoint != null ? checkpoint.Id : -1
             });
         }
     }
 
-    void RespawnObjects()
+    public void RespawnObjects()
     {
         foreach (var enemyA in FindObjectsByType<EnemyAController>(FindObjectsSortMode.None))
             Destroy(enemyA.gameObject);
@@ -165,6 +168,9 @@ public class GameManager : MonoBehaviour
                     var itemController = instance.GetComponent<ItemController>();
                     if (itemController != null)
                         itemController.SetId(info.Id);
+                    var checkpoint = instance.GetComponent<CheckpointTrigger>();
+                    if (checkpoint != null)
+                        checkpoint.SetId(info.CheckpointId);
                     break;
             }
         }

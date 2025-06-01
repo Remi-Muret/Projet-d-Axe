@@ -4,6 +4,7 @@ public class CheckpointTrigger : MonoBehaviour
 {
     [SerializeField] private int _id;
 
+    public int Id => _id;
     public bool IsTrigger { get; private set; }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -19,5 +20,10 @@ public class CheckpointTrigger : MonoBehaviour
             if (item != null)
                 TimeSystem.Instance.AddTime(item.ItemData.recovery);
         }
+    }
+
+    public void SetId(int id)
+    {
+        _id = id;
     }
 }

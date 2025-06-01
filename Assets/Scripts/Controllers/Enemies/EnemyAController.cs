@@ -25,9 +25,7 @@ public class EnemyAController : EnemyController
     {
         base.FixedUpdate();
 
-        LockedDirection();
         Move();
-        Jump();
         Patrol();
         Animation();
 
@@ -181,19 +179,6 @@ public class EnemyAController : EnemyController
         _isStunned = false;
     }
 
-    void LockedDirection()
-    {
-        bool wasGrounded = _canJump;
-        _canJump = CheckGroundCollision();
-        if (!_canJump && wasGrounded)
-        {
-            if (_direction > 0f)
-                _jumpDirection = 1f;
-            else if (_direction < 0f)
-                _jumpDirection = -1f;
-        }
-    }
-
     void Move()
     {
         if (_isStunned || _isDying) return;
@@ -202,17 +187,6 @@ public class EnemyAController : EnemyController
             _rigidbody2D.linearVelocity = new Vector2(_chargeDirection * _enemyAData.chargeSpeed, _rigidbody2D.linearVelocity.y);
         else
             _rigidbody2D.linearVelocity = new Vector2(_direction * _enemyAData.moveSpeed, _rigidbody2D.linearVelocity.y);
-    }
-
-    void Jump()
-    {
-        if (_isCharging || _isStunned || _isDying) return;
-
-        Vector2 forwardDirection = new Vector2(_direction, 0f);
-        Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y - 1.5f);
-        RaycastHit2D hitForward = Physics2D.Raycast(raycastOrigin, forwardDirection, 1f, _groundLayer);
-        if (hitForward.collider != null && _canJump)
-            _rigidbody2D.linearVelocity = new Vector2(_jumpDirection * _enemyAData.moveSpeed, _enemyAData.jumpForce);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

@@ -232,6 +232,8 @@ public class PlayerController : FigureController
             direction.x *= -1;
         }
 
+        PlaySound(_splashSound);
+
         Rigidbody2D _bombRigidbody2D = bomb.GetComponent<Rigidbody2D>();
         _bombRigidbody2D.AddForce(direction * _playerData.bombForce, ForceMode2D.Impulse);
         _isDirectionLocked = false;
@@ -339,6 +341,8 @@ public class PlayerController : FigureController
             sprite.flipX = true;
         }
 
+        PlaySound(_splashSound);
+
         Rigidbody2D _projectileRigidbody2D = projectile.GetComponent<Rigidbody2D>();
         _projectileRigidbody2D.linearVelocity = direction * _playerData.projectileForce;
         _isDirectionLocked = false;
@@ -368,8 +372,6 @@ public class PlayerController : FigureController
             else
                 _rigidbody2D.linearVelocity = new Vector2(-_playerData.knockbackX, _playerData.knockbackY);
         }
-
-        PlaySound(_hitSound);
 
         yield return new WaitForSeconds(0.1f);
 
