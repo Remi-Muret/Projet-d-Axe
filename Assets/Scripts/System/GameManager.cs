@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         healthSystem.healthUI = FindFirstObjectByType<HealthUI>();
         healthSystem.InitHealth();
 
-        FindFirstObjectByType<MainUIController>().SetPlayerHealthSystem(healthSystem);
+        FindFirstObjectByType<MainUI>().SetPlayerHealthSystem(healthSystem);
     }
 
     void RegisterObjects()

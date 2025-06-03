@@ -10,7 +10,6 @@ public class TimeSystem : MonoBehaviour
 
     private float _globalTimer;
     private float _remainingTime;
-    private int _lastPrintedSecond;
     private bool _isRunning;
 
     void Awake()
@@ -36,11 +35,6 @@ public class TimeSystem : MonoBehaviour
         _remainingTime -= Time.deltaTime;
 
         int currentSecond = Mathf.CeilToInt(_remainingTime);
-        if (currentSecond != _lastPrintedSecond)
-        {
-            _lastPrintedSecond = currentSecond;
-            Debug.Log($"Temps restant : {currentSecond} secondes");
-        }
 
         if (_remainingTime <= 0f)
         {
@@ -61,7 +55,6 @@ public class TimeSystem : MonoBehaviour
         _isRunning = true;
         _globalTimer = 0f;
         _remainingTime = _timer;
-        _lastPrintedSecond = -1;
     }
 
     public void StopTimer()
@@ -73,7 +66,6 @@ public class TimeSystem : MonoBehaviour
     public void ResetTimer()
     {
         _remainingTime = _timer;
-        _lastPrintedSecond = -1;
     }
 
     public void AddTime(float timeToAdd)
